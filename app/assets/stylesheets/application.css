@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+.nav {
+  min-height: 100vh;
+  height: 100%;
+  width: 150px;
+  float: left;
+}
+
