@@ -1,0 +1,19 @@
+<h1>保護鳥の追加</h1>
+<%= form_with model: @protection_bird, local:true do |f| %>
+  <h4>種類</h4>
+  <%= f.text_field :breed %>
+  <h4>画像</h4>
+  <%= f.attachment_field :image %>
+  <h4>場所</h4>
+  <%= f.text_field :protect_place %>
+  <h4>特徴</h4>
+  <%= f.text_field :feature %>
+  <h4>状況説明</h4>
+  <%= f.text_area :protect_introduction %>
+  <h4>年齢</h4>
+  <%= f.text_field :bird_age %>歳
+  <h4>鳥説明</h4>
+  <%= f.text_area :bird_introduction %>
+  <input name="protact_day" type="date" />
+  <%= f.submit '追加' %>
+<% end %>

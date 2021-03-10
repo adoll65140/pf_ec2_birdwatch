@@ -1,0 +1,15 @@
+<% @lost_birds.each do |lost_bird| %>
+<%= link_to lost_bird_path(lost_bird.id) do %>
+<div>
+  <%= attachment_image_tag lost_bird, :bird_image, :fill, 200, 200, fallback: "no_image.jpg" %>
+  <p>種類：<%= lost_bird.lost_bird_breed %></p>
+  <p>年齢：<%= lost_bird.lost_bird_age %></p>
+  <p>鳥説明：<%= lost_bird.lost_bird_introduction %></p>
+  <p>状況説明：<%= lost_bird.lost_introduction %></p>
+  <p>場所：<%= lost_bird.lost_place %></p>
+  <p>特徴：<%= lost_bird.feature %></p>
+  <p>行方不明日：<%= lost_bird.lost_day %></p>
+  <p>鳥の名前：<%= lost_bird.lost_bird_name %></p>
+</div>
+<% end %>
+<% end %>

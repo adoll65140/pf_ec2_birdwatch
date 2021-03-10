@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_09_222111) do
+ActiveRecord::Schema.define(version: 2021_03_10_005800) do
 
   create_table "birds", force: :cascade do |t|
     t.string "bird_name"
@@ -21,6 +21,38 @@ ActiveRecord::Schema.define(version: 2021_03_09_222111) do
     t.string "bird_back_image_id"
     t.integer "bird_age"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lost_birds", force: :cascade do |t|
+    t.string "lost_bird_name"
+    t.string "lost_bird_breed"
+    t.text "lost_bird_introduction"
+    t.string "bird_image_id"
+    t.date "lost_day"
+    t.integer "lost_bird_age"
+    t.integer "user_id"
+    t.string "lost_place"
+    t.text "feature"
+    t.text "lost_introduction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "flag", default: true
+  end
+
+  create_table "protection_birds", force: :cascade do |t|
+    t.string "bird_name"
+    t.string "breed"
+    t.text "bird_introduction"
+    t.string "image_id"
+    t.date "protect_day"
+    t.integer "bird_age"
+    t.integer "user_id"
+    t.string "protect_place"
+    t.text "feature"
+    t.text "protect_introduction"
+    t.boolean "flag", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

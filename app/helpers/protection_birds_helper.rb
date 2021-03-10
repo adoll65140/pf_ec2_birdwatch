@@ -1,0 +1,2 @@
+module ProtectionBirdsHelper
+end
