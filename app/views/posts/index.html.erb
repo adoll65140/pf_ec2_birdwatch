@@ -1,0 +1,15 @@
+<% @posts.each do |post| %>
+  <% if post.user == current_user %>
+  <%= link_to '消去', post_path(post), method: :delete%>
+  <% end %>
+<%= link_to post_path(post.id) do %>
+<div>
+  <%= attachment_image_tag post.user, :icon, :fill, 60, 60, fallback: "no_image.jpg" %>
+  <p>ユーザー名：<%= post.user.nickname %></p>
+  <p>タイトル：<%= post.title %></p>
+  <%= attachment_image_tag post, :image, :fill, 200, 200 %>
+  <p>内容：<%= post.body %></p>
+
+</div>
+<% end %>
+<% end %>

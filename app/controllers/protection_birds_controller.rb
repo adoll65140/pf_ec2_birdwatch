@@ -25,7 +25,7 @@ class ProtectionBirdsController < ApplicationController
   def update
     @protection_bird = ProtectionBird.find(params[:id])
     @protection_bird.update(protection_bird_params)
-    redirect_to protection_bird_path(@protection_bird.id)
+    redirect_to protection_bird_path(protection_bird.id)
   end
 
   def destroy
@@ -37,7 +37,7 @@ class ProtectionBirdsController < ApplicationController
   private
 
   def protection_bird_params
-    params.require(:protection_bird).permit(:bird_name, :breed, :bird_age, :feature, :bird_introduction,
+    params.require(:protection_bird).permit(:breed, :bird_age, :feature, :bird_introduction,
                                             :protect_place, :image, :protect_introduction, :protect_day)
   end
 end

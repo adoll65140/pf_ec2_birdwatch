@@ -1,7 +1,6 @@
 <div>
   <%= attachment_image_tag @protection_bird, :image, :fill, 200, 200, fallback: "no_image.jpg" %>
   <p>種類：<%= @protection_bird.breed %></p>
-  <p>年齢：<%= @protection_bird.bird_age %></p>
   <p>鳥説明：<%= @protection_bird.bird_introduction %></p>
   <p>状況説明：<%= @protection_bird.protect_introduction %></p>
   <p>場所：<%= @protection_bird.protect_place %></p>

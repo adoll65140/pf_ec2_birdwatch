@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :birds, dependent: :destroy
   has_many :lost_birds, dependent: :destroy
   has_many :protection_birds, dependent: :destroy
+  has_many :posts, dependent: :destroy
 
   attachment :icon
   attachment :back_image
