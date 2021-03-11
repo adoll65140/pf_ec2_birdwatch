@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_11_192555) do
+ActiveRecord::Schema.define(version: 2021_03_11_211725) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,13 @@ ActiveRecord::Schema.define(version: 2021_03_11_192555) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "bird_checks", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "bird_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "bird_comments", force: :cascade do |t|
     t.text "comment"
     t.integer "user_id"
@@ -50,6 +57,13 @@ ActiveRecord::Schema.define(version: 2021_03_11_192555) do
     t.string "bird_back_image_id"
     t.integer "bird_age"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -76,6 +90,13 @@ ActiveRecord::Schema.define(version: 2021_03_11_192555) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "flag", default: true
+  end
+
+  create_table "lost_checks", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "lost_bird_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "post_comments", force: :cascade do |t|
@@ -117,6 +138,13 @@ ActiveRecord::Schema.define(version: 2021_03_11_192555) do
     t.text "feature"
     t.text "protect_introduction"
     t.boolean "flag", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "protection_checks", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "protection_bird_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

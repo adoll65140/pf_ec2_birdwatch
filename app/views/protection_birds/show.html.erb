@@ -1,3 +1,13 @@
+<% if @protection_bird.checked_by?(current_user) %>
+    <p>
+      <%= link_to "気になる　解除", protection_bird_protection_checks_path(@protection_bird), method: :delete %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to "気になる", protection_bird_protection_checks_path(@protection_bird), method: :post %>
+    </p>
+  <% end %>
+<div>
 <div>
   <%= attachment_image_tag @protection_bird, :image, :fill, 200, 200, fallback: "no_image.jpg" %>
   <p>種類：<%= @protection_bird.breed %></p>

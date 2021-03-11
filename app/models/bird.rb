@@ -1,6 +1,7 @@
 class Bird < ApplicationRecord
   belongs_to :user
   has_many :bird_comments, dependent: :destroy
+  has_many :bird_checks, dependent: :destroy
 
   attachment :bird_icon
   attachment :bird_back_image
@@ -10,5 +11,9 @@ class Bird < ApplicationRecord
     validates :breed
     validates :bird_introduction
     validates :bird_age
+  end
+  
+  def checked_by?(user)
+    bird_checks.where(user_id: user.id).exists?
   end
 end

@@ -1,6 +1,7 @@
 class LostBird < ApplicationRecord
   belongs_to :user
   has_many :lost_bird_comments, dependent: :destroy
+  has_many :lost_checks, dependent: :destroy
 
   attachment :bird_image
 
@@ -13,5 +14,9 @@ class LostBird < ApplicationRecord
     validates :lost_place
     validates :feature
     validates :lost_introduction
+  end
+  
+  def checked_by?(user)
+    lost_checks.where(user_id: user.id).exists?
   end
 end

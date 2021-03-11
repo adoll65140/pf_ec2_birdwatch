@@ -1,0 +1,2 @@
+module ProtectionChecksHelper
+end

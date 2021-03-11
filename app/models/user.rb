@@ -11,6 +11,10 @@ class User < ApplicationRecord
   has_many :bird_comments, dependent: :destroy
   has_many :lost_bird_comments, dependent: :destroy
   has_many :protection_bird_comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :bird_checks, dependent: :destroy
+  has_many :protection_checks, dependent: :destroy
+  has_many :lost_checks, dependent: :destroy
 
   attachment :icon
   attachment :back_image
