@@ -7,4 +7,23 @@
   <p>特徴：<%= @protection_bird.feature %></p>
   <p>保護日：<%= @protection_bird.protect_day %></p>
 </div>
-<%= link_to "編集", edit_protection_bird_path(@protection_bird.id) %> 
+<%= link_to "編集", edit_protection_bird_path(@protection_bird.id) %>
+
+<div class="new-comment">
+<%= form_with(model:[@protection_bird, @protection_bird_comment], local: true) do |f| %>
+  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+  <%= f.submit "送信する" %>
+<% end %>
+</div>
+<div class="comments">
+<p>コメント件数：<%= @protection_bird.protection_bird_comments.count %></p>
+<% @protection_bird.protection_bird_comments.each do |protection_bird_comment| %>
+  <%= protection_bird_comment.user.nickname %>
+  <%= protection_bird_comment.created_at.strftime('%Y/%m/%d') %><%= protection_bird_comment.comment %>
+  <% if protection_bird_comment.user == current_user %>
+  <div class="comment-delete">
+    <%= link_to "削除", protection_bird_protection_bird_comment_path(protection_bird_comment.protection_bird, protection_bird_comment), method: :delete %>
+  </div>
+  <% end %>
+<% end %>
+</div>

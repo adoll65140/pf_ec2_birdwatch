@@ -7,3 +7,21 @@
   <p>鳥の名前：<%= @bird.bird_name %></p>
 </div>
 <%= link_to "編集", edit_bird_path(@bird.id) %> 
+<div class="comments">
+<p>コメント件数：<%= @bird.bird_comments.count %></p>
+<% @bird.bird_comments.each do |bird_comment| %>
+  <%= bird_comment.user.nickname %>
+  <%= bird_comment.created_at.strftime('%Y/%m/%d') %><%= bird_comment.comment %>
+  <% if bird_comment.user == current_user %>
+  <div class="comment-delete">
+    <%= link_to "削除", bird_bird_comment_path(bird_comment.bird, bird_comment), method: :delete %>
+  </div>
+  <% end %>
+<% end %>
+</div>
+<div class="new-comment">
+<%= form_with(model:[@bird, @bird_comment], local: true) do |f| %>
+  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+  <%= f.submit "送信する" %>
+<% end %>
+</div>

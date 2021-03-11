@@ -1,5 +1,6 @@
 class Bird < ApplicationRecord
   belongs_to :user
+  has_many :bird_comments, dependent: :destroy
 
   attachment :bird_icon
   attachment :bird_back_image

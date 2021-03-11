@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_10_134044) do
+ActiveRecord::Schema.define(version: 2021_03_11_192555) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 2021_03_10_134044) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "bird_comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "bird_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "birds", force: :cascade do |t|
     t.string "bird_name"
     t.string "breed"
@@ -42,6 +50,14 @@ ActiveRecord::Schema.define(version: 2021_03_10_134044) do
     t.string "bird_back_image_id"
     t.integer "bird_age"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lost_bird_comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "lost_bird_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -62,6 +78,14 @@ ActiveRecord::Schema.define(version: 2021_03_10_134044) do
     t.boolean "flag", default: true
   end
 
+  create_table "post_comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.integer "bird_id"
@@ -69,6 +93,14 @@ ActiveRecord::Schema.define(version: 2021_03_10_134044) do
     t.text "body"
     t.string "image_id"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "protection_bird_comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "protection_bird_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

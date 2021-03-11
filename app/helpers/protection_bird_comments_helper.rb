@@ -1,0 +1,2 @@
+module ProtectionBirdCommentsHelper
+end

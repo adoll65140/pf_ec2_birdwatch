@@ -13,6 +13,7 @@ class ProtectionBirdsController < ApplicationController
 
   def show
     @protection_bird = ProtectionBird.find(params[:id])
+    @protection_bird_comment = ProtectionBirdComment.new
   end
 
   def create

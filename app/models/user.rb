@@ -7,6 +7,10 @@ class User < ApplicationRecord
   has_many :lost_birds, dependent: :destroy
   has_many :protection_birds, dependent: :destroy
   has_many :posts, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
+  has_many :bird_comments, dependent: :destroy
+  has_many :lost_bird_comments, dependent: :destroy
+  has_many :protection_bird_comments, dependent: :destroy
 
   attachment :icon
   attachment :back_image

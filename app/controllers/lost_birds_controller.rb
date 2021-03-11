@@ -13,6 +13,7 @@ class LostBirdsController < ApplicationController
 
   def show
     @lost_bird = LostBird.find(params[:id])
+    @lost_bird_comment = LostBirdComment.new
   end
 
   def create

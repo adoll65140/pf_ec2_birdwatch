@@ -10,3 +10,22 @@
   <p>鳥の名前：<%= @lost_bird.lost_bird_name %></p>
 </div>
 <%= link_to "編集", edit_lost_bird_path(@lost_bird.id) %> 
+
+<div class="new-comment">
+<%= form_with(model:[@lost_bird, @lost_bird_comment], local: true) do |f| %>
+  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+  <%= f.submit "送信する" %>
+<% end %>
+</div>
+<div class="comments">
+<p>コメント件数：<%= @lost_bird.lost_bird_comments.count %></p>
+<% @lost_bird.lost_bird_comments.each do |lost_bird_comment| %>
+  <%= lost_bird_comment.user.nickname %>
+  <%= lost_bird_comment.created_at.strftime('%Y/%m/%d') %><%= lost_bird_comment.comment %>
+  <% if lost_bird_comment.user == current_user %>
+  <div class="comment-delete">
+    <%= link_to "削除", lost_bird_lost_bird_comment_path(lost_bird_comment.lost_bird, lost_bird_comment), method: :delete %>
+  </div>
+  <% end %>
+<% end %>
+</div>
