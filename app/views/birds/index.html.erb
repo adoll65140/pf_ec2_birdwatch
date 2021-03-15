@@ -3,7 +3,7 @@
 <div>
   <%= attachment_image_tag bird, :bird_icon, :fill, 60, 60, fallback: "no_image.jpg" %>
   <%= attachment_image_tag bird, :bird_back_image, :fill, 200, 200, fallback: "no_image.jpg" %>
-  <p>種類：<%= bird.breed %></p>
+  <p>種類：<%= bird.breed.name %></p>
   <p>年齢：<%= bird.bird_age %></p>
   <p>紹介分：<%= bird.bird_introduction %></p>
   <p>鳥の名前：<%= bird.bird_name %></p>

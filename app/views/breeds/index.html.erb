@@ -1,0 +1,12 @@
+<%= form_with model:@breed, url: breeds_path(@breed.id), method: :post, local: true do |f| %>
+      <%= f.label :"種類", class:"form" %>
+      <%= f.text_field :name, class:"form" %>
+      <%= f.submit "新規登録", class: "btn btn-success" %>
+    <% end %>
+    
+    <% @breeds.each do |breed| %>
+          <tr>
+            <td class="text-left"><%= breed.name %></td>
+            <td><%= link_to "編集する", edit_breed_path(breed), class: "btn btn-success" %></td>
+          </tr>
+        <% end %>

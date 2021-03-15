@@ -2,7 +2,7 @@
 <%= link_to protection_bird_path(protection_bird.id) do %>
 <div>
   <%= attachment_image_tag protection_bird, :image, :fill, 200, 200, fallback: "no_image.jpg" %>
-  <p>種類：<%= protection_bird.breed %></p>
+  <p>種類：<%= protection_bird.breed.name %></p>
   <p>鳥説明：<%= protection_bird.bird_introduction %></p>
   <p>状況説明：<%= protection_bird.protect_introduction %></p>
   <p>場所：<%= protection_bird.protect_place %></p>

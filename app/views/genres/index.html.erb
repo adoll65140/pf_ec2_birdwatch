@@ -1,0 +1,10 @@
+<%= form_with model:@genre, url: genres_path(@genre.id), method: :post, local: true do |f| %>
+      <%= f.label :"ジャンル", class:"form" %>
+      <%= f.text_field :name, class:"form" %>
+      <%= f.submit "新規登録", class: "btn btn-success" %>
+    <% end %>
+    
+  <% @genres.each do |genre| %>
+    <%= genre.name %>
+    <%= link_to "編集する", edit_genre_path(genre), class: "btn btn-success" %>
+  <% end %>

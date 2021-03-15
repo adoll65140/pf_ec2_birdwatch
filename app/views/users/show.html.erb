@@ -9,6 +9,13 @@
   <%= link_to "迷子一覧", lost_birds_path(current_user.id) %> 
   <%= link_to "保護鳥追加", new_protection_bird_path %> 
   <%= link_to "保護鳥一覧", protection_birds_path(current_user.id) %> 
+  <%= link_to "里親鳥追加", new_adoption_path %> 
+  <%= link_to "里親一覧", adoptions_path(current_user.id) %> 
+  <%= link_to "種類追加", breeds_path %> 
+  <%= link_to "ジャンル追加", genres_path %> 
+  <%= link_to "不用品追加", new_item_path %> 
+  <%= link_to "一覧", items_path(current_user.id) %> 
+  
   
   
   

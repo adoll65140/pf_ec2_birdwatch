@@ -1,0 +1,6 @@
+ <%= form_with model:@genre, url: genre_path(@.id), method: :patch, local:true do |f| %>
+    <div>
+      <%= f.label :"種類", class:"form" %>
+      <%= f.text_field :name, class:"form" %>
+      <%= f.submit "変更を保存", class: "btn btn-success" %>
+    <% end %>

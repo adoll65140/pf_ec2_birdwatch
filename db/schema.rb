@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_11_211725) do
+ActiveRecord::Schema.define(version: 2021_03_15_014300) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,27 @@ ActiveRecord::Schema.define(version: 2021_03_11_211725) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "adoptions", force: :cascade do |t|
+    t.string "title"
+    t.text "introduction"
+    t.text "health"
+    t.text "other"
+    t.text "background"
+    t.boolean "flag", default: true
+    t.integer "postcode"
+    t.integer "prefecture_code"
+    t.string "address_city"
+    t.string "address_street"
+    t.string "address_building"
+    t.string "image_id"
+    t.integer "breed_id"
+    t.integer "user_id"
+    t.integer "age"
+    t.integer "sex"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "bird_checks", force: :cascade do |t|
     t.integer "user_id"
     t.integer "bird_id"
@@ -50,12 +71,40 @@ ActiveRecord::Schema.define(version: 2021_03_11_211725) do
 
   create_table "birds", force: :cascade do |t|
     t.string "bird_name"
-    t.string "breed"
     t.text "bird_introduction"
     t.string "bird_icon_id"
     t.date "bird_birthday"
     t.string "bird_back_image_id"
     t.integer "bird_age"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "breed_id"
+  end
+
+  create_table "breeds", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "item"
+    t.text "introduction"
+    t.boolean "flag", default: true
+    t.integer "postcode"
+    t.integer "prefecture_code"
+    t.string "address_city"
+    t.string "address_street"
+    t.string "address_building"
+    t.string "image_id"
+    t.integer "genre_id"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -78,7 +127,6 @@ ActiveRecord::Schema.define(version: 2021_03_11_211725) do
 
   create_table "lost_birds", force: :cascade do |t|
     t.string "lost_bird_name"
-    t.string "lost_bird_breed"
     t.text "lost_bird_introduction"
     t.string "bird_image_id"
     t.date "lost_day"
@@ -90,6 +138,7 @@ ActiveRecord::Schema.define(version: 2021_03_11_211725) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "flag", default: true
+    t.integer "breed_id"
   end
 
   create_table "lost_checks", force: :cascade do |t|
@@ -128,7 +177,6 @@ ActiveRecord::Schema.define(version: 2021_03_11_211725) do
 
   create_table "protection_birds", force: :cascade do |t|
     t.string "bird_name"
-    t.string "breed"
     t.text "bird_introduction"
     t.string "image_id"
     t.date "protect_day"
@@ -140,6 +188,7 @@ ActiveRecord::Schema.define(version: 2021_03_11_211725) do
     t.boolean "flag", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "breed_id"
   end
 
   create_table "protection_checks", force: :cascade do |t|

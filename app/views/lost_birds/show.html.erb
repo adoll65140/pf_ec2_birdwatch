@@ -9,7 +9,7 @@
   <% end %>
 <div>
   <%= attachment_image_tag @lost_bird, :bird_image, :fill, 200, 200, fallback: "no_image.jpg" %>
-  <p>種類：<%= @lost_bird.lost_bird_breed %></p>
+  <p>種類：<%= @lost_bird.breed.name %></p>
   <p>年齢：<%= @lost_bird.lost_bird_age %></p>
   <p>鳥説明：<%= @lost_bird.lost_bird_introduction %></p>
   <p>状況説明：<%= @lost_bird.lost_introduction %></p>

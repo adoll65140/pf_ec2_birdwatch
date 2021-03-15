@@ -1,0 +1,18 @@
+<h1>不用品編集</h1>
+<%= form_with model: @item, local:true do |f| %>
+  <h4>タイトル</h4>
+  <%= f.text_field :item %>
+  <h4>種類</h4>
+  <%= f.collection_select :genre_id, Genre.all, :id, :name, {include_blank: "選択してください"} %>
+  <h4>説明</h4>
+  <%= f.text_field :introduction %>
+  <h4>画像</h4>
+  <%= f.attachment_field :image %>
+  <p>郵便番号</p>
+  <%= f.text_field :postcode, id: "postcode" %>
+  <p>都道府県</p>
+  <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' }, id: 'prefecture_code' %><br>
+  <p>市区町村</p>
+  <%= f.text_field :address_city, id: "address_city" %>
+  <%= f.submit '編集' %>
+<% end %>

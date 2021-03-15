@@ -1,0 +1,16 @@
+<div>
+  <p>タイトル：<%= @adoption.title %></p>
+  <%= attachment_image_tag @adoption, :image, :fill, 60, 60, fallback: "no_image.jpg" %>
+  <p>年齢：<%= @adoption.age %></p>
+  <p>特徴　性格：<%= @adoption.introduction %></p>
+  <p>健康状態：<%= @adoption.health %></p>
+  <p>その他：<%= @adoption.other %></p>
+  <p>募集経緯：<%= @adoption.background %></p>
+  <p>性別：<%= @adoption.sex %></p>
+  <p>取引場所：<%= @adoption.address_city %><%= @adoption.prefecture_name %></p>
+  <p>種類：<%= @adoption.breed.name %></p>
+  
+  <%= link_to "編集", edit_adoption_path(@adoption.id) %> 
+  <%= link_to "削除", adoption_path(@adoption), method: :delete %>
+  
+</div>
