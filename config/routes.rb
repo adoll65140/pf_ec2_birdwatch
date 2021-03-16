@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'posts/mypage' => 'posts#mypage', as: 'mypage'
   get 'users/unsubscribe'
   root 'homes#top'
@@ -26,5 +25,7 @@ Rails.application.routes.draw do
   end
   resources :genres
   resources :breeds
+  resources :messages, :only => [:create]
+  resources :rooms, :only => [:create, :show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

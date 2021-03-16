@@ -17,6 +17,9 @@ class User < ApplicationRecord
   has_many :lost_checks, dependent: :destroy
   has_many :items, dependent: :destroy
   has_many :adoptions, dependent: :destroy
+  has_many :messages
+  has_many :entries
+  has_many :rooms, through: :entries
 
   attachment :icon
   attachment :back_image

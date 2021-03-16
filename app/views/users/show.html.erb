@@ -2,6 +2,21 @@
   <p>背景:<%= attachment_image_tag @user, :back_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
   <p>ユーザー名：<%= @user.nickname %></p>
   <p>説明：<%= @user.introduction %></p>
+  <% if @user.id == current_user.id %>
+    <%= @msg %>
+  <% else %>
+    <% if @isRoom == true %>
+        <p><%= link_to 'DMへ', room_path(@roomId) %></p>
+    <% else %>
+        <%= form_for @room do |f| %>
+            <%= fields_for @entry do |e|%>
+                <% e.hidden_field :user_id, value: @user.id %>
+            <% end %>
+        <%= f.submit "DMを開始する"%>
+        <% end %>
+    <% end %>
+<% end %>
+</div>
   <%= link_to "編集", edit_user_path(@user.id) %> 
   <%= link_to "鳥追加", new_bird_path %> 
   <%= link_to "鳥一覧", birds_path(current_user.id)  %> 

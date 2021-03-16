@@ -13,3 +13,9 @@
 </div>
 <% end %>
 <% end %>
+<% @users.each do |u| %>
+  <div class="user-in">
+  <p><%= u.nickname %>さん</p>
+  <p><%= link_to 'ユーザーページへ', user_path(u.id) %></p>
+  </div>
+<% end %>
