@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  resources :notifications, only: :index
   get 'posts/mypage' => 'posts#mypage', as: 'mypage'
   get 'users/unsubscribe'
   root 'homes#top'
+  get 'homes/home' => 'homes#home', as: 'home'
   get 'homes/about' => 'homes#about', as: 'about'
   devise_for :users
   resources :users

@@ -4,6 +4,7 @@ class LostBirdCommentsController < ApplicationController
     comment = current_user.lost_bird_comments.new(lost_bird_comment_params)
     comment.lost_bird_id = lost_bird.id
     comment.save
+    lost_bird.create_notification_lost_bird_comment!(current_user, comment.id)
     redirect_to lost_bird_path(lost_bird)  
   end
 

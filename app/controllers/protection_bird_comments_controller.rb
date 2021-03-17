@@ -4,6 +4,7 @@ class ProtectionBirdCommentsController < ApplicationController
     comment = current_user.protection_bird_comments.new(protection_bird_comment_params)
     comment.protection_bird_id = protection_bird.id
     comment.save
+    protection_bird.create_notification_protection_bird_comment!(current_user, comment.id)
     redirect_to protection_bird_path(protection_bird)
   end
 

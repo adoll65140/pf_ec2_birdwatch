@@ -1,8 +1,11 @@
 class HomesController < ApplicationController
-  def top
+  def home
     @user = current_user
     @post = Post.new
     @posts = @user.posts
+  end
+  
+  def top
   end
   
   def create
