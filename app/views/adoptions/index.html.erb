@@ -1,3 +1,4 @@
+<%= render 'layouts/bird_search', obj:adoptions_path, message:"里親検索" %>
 <% @adoptions.each do |adoption| %>
 <%= link_to adoption_path(adoption.id) do %>
 <div>
@@ -5,7 +6,7 @@
   <%= attachment_image_tag adoption, :image, :fill, 60, 60, fallback: "no_image.jpg" %>
  <p>種類：<%= adoption.breed.name %></p>
   <p>性別：<%= adoption.sex %></p>
-  <p>取引場所：<%= adoption.address_city %><%= adoption.prefecture_name %></p>
+  <p>取引場所：<%= adoption.prefecture_name %><%= adoption.address_city %></p>
 </div>
 <% end %>
 <% end %>

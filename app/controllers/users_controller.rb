@@ -3,9 +3,7 @@ class UsersController < ApplicationController
     @user=User.find(params[:id])
     @currentUserEntry=Entry.where(user_id: current_user.id)
     @userEntry=Entry.where(user_id: @user.id)
-    if @user.id == current_user.id
-      @msg ="他のユーザーとDMしてみよう！"
-    else
+    unless @user.id == current_user.id
       @currentUserEntry.each do |cu|
         @userEntry.each do |u|
           if cu.room_id == u.room_id then
@@ -20,6 +18,10 @@ class UsersController < ApplicationController
       end
     end
   end
+  
+  def profile
+    @user = User.find(params[:id])
+  end
 
   def edit
     @user = User.find(params[:id])
@@ -32,6 +34,20 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update(user_params)
     redirect_to user_path(@user.id)  
+  end
+  
+  def check
+    @user = current_user
+    @birds = @user.birds
+    @lost_birds = @user.lost_birds
+    @protection_birds = @user.protection_birds
+
+    bird_checks = BirdCheck.where(user_id: current_user.id).pluck(:bird_id)
+    @bird_list = Bird.find(bird_checks)
+    lost_checks = LostCheck.where(user_id: current_user.id).pluck(:lost_bird_id)
+    @lost_list = LostBird.find(lost_checks)
+    protection_checks = ProtectionCheck.where(user_id: current_user.id).pluck(:protection_bird_id)
+    @protection_list = ProtectionBird.find(protection_checks)
   end
 
   private

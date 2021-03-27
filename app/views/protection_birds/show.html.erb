@@ -1,3 +1,4 @@
+<%= render 'layouts/bird_search', obj:protection_birds_path, message:"保護鳥検索" %>
 <% if @protection_bird.checked_by?(current_user) %>
     <p>
       <%= link_to "気になる　解除", protection_bird_protection_checks_path(@protection_bird), method: :delete %>

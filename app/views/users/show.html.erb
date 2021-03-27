@@ -16,21 +16,32 @@
         <% end %>
     <% end %>
 <% end %>
+<td>フォロー数:<%= @user.follower.count %></td>
+        <td>フォロワー数:<%= @user.followed.count %></td>
+        <td>
+          <% unless @user == current_user %>
+            <% if current_user.following?(@user) %>
+              <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST %>
+            <% else %>
+              <%= link_to 'フォローする', follow_path(@user.id), method: :POST %>
+            <% end %>
+          <% end %>
+        </td>
 </div>
-  <%= link_to "編集", edit_user_path(@user.id) %> 
-  <%= link_to "鳥追加", new_bird_path %> 
-  <%= link_to "鳥一覧", birds_path(current_user.id)  %> 
-  <%= link_to "迷子追加", new_lost_bird_path %> 
-  <%= link_to "迷子一覧", lost_birds_path(current_user.id) %> 
-  <%= link_to "保護鳥追加", new_protection_bird_path %> 
-  <%= link_to "保護鳥一覧", protection_birds_path(current_user.id) %> 
-  <%= link_to "里親鳥追加", new_adoption_path %> 
-  <%= link_to "里親一覧", adoptions_path(current_user.id) %> 
-  <%= link_to "種類追加", breeds_path %> 
-  <%= link_to "ジャンル追加", genres_path %> 
-  <%= link_to "不用品追加", new_item_path %> 
-  <%= link_to "一覧", items_path(current_user.id) %> 
-  
-  
-  
-  
+  <%= link_to "編集", edit_user_path(@user.id) %>
+  <%= link_to "鳥追加", new_bird_path %>
+  <%= link_to "鳥一覧", birds_path %>
+  <%= link_to "迷子追加", new_lost_bird_path %>
+  <%= link_to "迷子一覧", lost_birds_path(current_user.id) %>
+  <%= link_to "保護鳥追加", new_protection_bird_path %>
+  <%= link_to "保護鳥一覧", protection_birds_path(current_user.id) %>
+  <%= link_to "里親鳥追加", new_adoption_path %>
+  <%= link_to "里親一覧", adoptions_path(@user.id) %>
+  <%= link_to "種類追加", breeds_path %>
+  <%= link_to "ジャンル追加", genres_path %>
+  <%= link_to "不用品追加", new_item_path %>
+  <%= link_to "一覧", items_path(current_user.id) %>
+
+
+
+

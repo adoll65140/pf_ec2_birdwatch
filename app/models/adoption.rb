@@ -10,7 +10,7 @@ class Adoption < ApplicationRecord
     self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
 
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :breed, optional: true
   attachment :image
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_003256) do
+ActiveRecord::Schema.define(version: 2021_03_27_180025) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_003256) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "breed_id"
+    t.integer "sex"
   end
 
   create_table "breeds", force: :cascade do |t|
@@ -148,6 +149,10 @@ ActiveRecord::Schema.define(version: 2021_03_16_003256) do
     t.datetime "updated_at", null: false
     t.boolean "flag", default: true
     t.integer "breed_id"
+    t.string "title"
+    t.string "color"
+    t.integer "prefecture_code"
+    t.integer "sex"
   end
 
   create_table "lost_checks", force: :cascade do |t|
@@ -206,11 +211,11 @@ ActiveRecord::Schema.define(version: 2021_03_16_003256) do
   end
 
   create_table "protection_birds", force: :cascade do |t|
-    t.string "bird_name"
+    t.string "color"
     t.text "bird_introduction"
     t.string "image_id"
     t.date "protect_day"
-    t.integer "bird_age"
+    t.integer "sex"
     t.integer "user_id"
     t.string "protect_place"
     t.text "feature"
@@ -219,11 +224,20 @@ ActiveRecord::Schema.define(version: 2021_03_16_003256) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "breed_id"
+    t.integer "prefecture_code"
+    t.string "title"
   end
 
   create_table "protection_checks", force: :cascade do |t|
     t.integer "user_id"
     t.integer "protection_bird_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -5,6 +5,8 @@ class LostBirdsController < ApplicationController
 
   def index
     @lost_birds = LostBird.all
+    @lost_birds = @lost_birds.where('breed_id LIKE ?', "#{params[:breed_id]}") if params[:breed_id].present?
+    @lost_birds = @lost_birds.where('prefecture_code LIKE ?', "#{params[:prefecture_code]}") if params[:prefecture_code].present?
   end
 
   def edit
@@ -38,7 +40,7 @@ class LostBirdsController < ApplicationController
   private
 
   def lost_bird_params
-    params.require(:lost_bird).permit(:lost_bird_name, :lost_bird_breed, :lost_bird_age, :feature, :lost_introduction,
-                                      :lost_bird_introduction, :bird_image, :bird_icon, :lost_place)
+    params.require(:lost_bird).permit(:lost_bird_name, :breed_id, :lost_bird_age, :feature, :lost_introduction, :prefecture_code,
+                                      :lost_bird_introduction, :bird_image, :bird_icon, :lost_place, :title, :color, :sex)
   end
 end

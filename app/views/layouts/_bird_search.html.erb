@@ -1,0 +1,6 @@
+<%= form_with url: obj, method: :get, local: true do |f| %>
+  <%= message %>
+  <%= f.collection_select(:breed_id, Breed.all, :id, :name, include_blank: '鳥の種類') %>
+  <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '都道府県' }, id: 'prefecture_code' %>
+  <%= f.submit '検索', name: nil %>
+<% end %>

@@ -1,3 +1,4 @@
+<%= render 'layouts/bird_search', obj:lost_birds_path, message:"迷子の鳥検索" %>
 <% @lost_birds.each do |lost_bird| %>
 <%= link_to lost_bird_path(lost_bird.id) do %>
 <div>

@@ -1,6 +1,8 @@
 class AdoptionsController < ApplicationController
   def index
     @adoptions = Adoption.all
+    @adoptions = @adoptions.where('breed_id LIKE ?', "#{params[:breed_id]}") if params[:breed_id].present?
+    @adoptions = @adoptions.where('prefecture_code LIKE ?', "#{params[:prefecture_code]}") if params[:prefecture_code].present?
   end
 
   def edit
@@ -18,7 +20,7 @@ class AdoptionsController < ApplicationController
     @currentUserEntry=Entry.where(user_id: current_user.id)
     @userEntry=Entry.where(user_id: @adoption.user.id)
     if @adoption.user.id == current_user.id
-      @msg ="他のユーザーとDMしてみよう！"
+      @msg ="DM"
     else
       @currentUserEntry.each do |cu|
         @userEntry.each do |u|

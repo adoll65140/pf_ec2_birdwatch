@@ -1,3 +1,5 @@
+<%= render 'layouts/bird_search', obj:protection_birds_path, message:"保護鳥検索" %>
+
 <% @protection_birds.each do |protection_bird| %>
 <%= link_to protection_bird_path(protection_bird.id) do %>
 <div>

@@ -1,0 +1,6 @@
+<%= form_with url: items_path, method: :get, local: true do |f| %>
+  <%= message %>
+  <%= f.collection_select(:genre_id, Genre.all, :id, :name, include_blank: 'ジャンル') %>
+  <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '都道府県' }, id: 'prefecture_code' %>
+  <%= f.submit '検索', name: nil %>
+<% end %>

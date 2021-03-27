@@ -1,3 +1,4 @@
+<%= render 'layouts/bird_search', obj:lost_birds_path, message:"迷子の鳥検索" %>
 <% if @lost_bird.checked_by?(current_user) %>
     <p>
       <%= link_to "気になる　解除", lost_bird_lost_checks_path(@lost_bird), method: :delete %>

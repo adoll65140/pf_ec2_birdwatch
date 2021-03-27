@@ -22,26 +22,40 @@ class User < ApplicationRecord
   has_many :rooms, through: :entries
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
-  
+  has_many :follower, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
+  has_many :followed, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
+  has_many :following_user, through: :follower, source: :followed
+  has_many :follower_user, through: :followed, source: :follower
+
   attachment :icon
   attachment :back_image
 
   with_options presence: true do #空白禁止
-    validates :first_name
-    validates :last_name
-    validates :first_name_kana
-    validates :last_name_kana
-    validates :postal_code
-    validates :address
     validates :telephone_number
     validates :nickname
   end
   validates :email, uniqueness: true #重複禁止
-  validates :first_name_kana, :last_name_kana, #正規表現
-      format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: "カタカナで入力して下さい。"}
-  validates :postal_code, format: { with: /\A\d{7}\z/} #正規表現
   validates :telephone_number, format: { with: /\A\d{10,11}\z/} #正規表現
   validates :is_deleted, inclusion:{in: [true, false]} #入力制限
 
+  def self.search(search)
+    if search
+      User.where(['nickname LIKE ?', "%#{search}%"])
+    else
+      User.all
+    end
+  end
+
+  def follow(user_id)
+    follower.create(followed_id: user_id)
+  end
+
+  def unfollow(user_id)
+    follower.find_by(followed_id: user_id).destroy
+  end
+
+  def following?(user)
+    following_user.include?(user)
+  end
 
 end

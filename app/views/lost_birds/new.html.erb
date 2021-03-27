@@ -1,19 +1,32 @@
 <h1>迷子の鳥追加</h1>
 <%= form_with model: @lost_bird, local:true do |f| %>
+  <h4>タイトル</h4>
+  <%= f.text_field :title %>
   <h4>名前</h4>
   <%= f.text_field :lost_bird_name %>
   <h4>種類</h4>
   <%= f.collection_select :breed_id, Breed.all, :id, :name, {include_blank: "選択してください"} %>
   <h4>画像</h4>
   <%= f.attachment_field :bird_image %>
-  <h4>場所</h4>
+  <p>都道府県</p>
+  <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' }, id: 'prefecture_code' %>
+  <h4>市区町村</h4>
   <%= f.text_field :lost_place %>
   <h4>特徴</h4>
   <%= f.text_field :feature %>
   <h4>状況説明</h4>
   <%= f.text_area :lost_introduction %>
+  <h4>色</h4>
+  <%= f.text_field :color %>
   <h4>年齢</h4>
   <%= f.text_field :lost_bird_age %>歳
+  <h4>性別</h4>
+    <%= f.label :オス  %>
+    <%= f.radio_button :sex, :オス %>
+    <%= f.label :メス  %>
+    <%= f.radio_button :sex, :メス %>
+    <%= f.label :不明  %>
+    <%= f.radio_button :sex, :不明 %>
   <h4>鳥説明</h4>
   <%= f.text_area :lost_bird_introduction %>
   <input name="lost_day" type="date" />

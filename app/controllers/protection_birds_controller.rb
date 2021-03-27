@@ -5,6 +5,8 @@ class ProtectionBirdsController < ApplicationController
 
   def index
     @protection_birds = ProtectionBird.all
+    @protection_birds = @protection_birds.where('breed_id LIKE ?', "#{params[:breed_id]}") if params[:breed_id].present?
+    @protection_birds = @protection_birds.where('prefecture_code LIKE ?', "#{params[:prefecture_code]}") if params[:prefecture_code].present?
   end
 
   def edit
@@ -38,7 +40,8 @@ class ProtectionBirdsController < ApplicationController
   private
 
   def protection_bird_params
-    params.require(:protection_bird).permit(:breed, :bird_age, :feature, :bird_introduction,
+    params.require(:protection_bird).permit(:breed_id, :feature, :bird_introduction, :title, :sex, :color, :prefecture_code,
                                             :protect_place, :image, :protect_introduction, :protect_day)
   end
+
 end

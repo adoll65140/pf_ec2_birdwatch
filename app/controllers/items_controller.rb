@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
   def index
     @items = Item.all
+    @items = @items.where('genre_id LIKE ?', "#{params[:genre_id]}") if params[:genre_id].present?
+    @items = @items.where('prefecture_code LIKE ?', "#{params[:prefecture_code]}") if params[:prefecture_code].present?
   end
 
   def edit
@@ -17,9 +19,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @currentUserEntry=Entry.where(user_id: current_user.id)
     @userEntry=Entry.where(user_id: @item.user.id)
-    if @item.user.id == current_user.id
-      @msg ="他のユーザーとDMしてみよう！"
-    else
+    unless @item.user.id == current_user.id
       @currentUserEntry.each do |cu|
         @userEntry.each do |u|
           if cu.room_id == u.room_id then
