@@ -1,36 +1,56 @@
-<% if @bird.checked_by?(current_user) %>
+<div class="col-md-10 mx-auto">
+  <h2><%= @bird.bird_name %>のお部屋</h2>
+</div>
+<div class="col-md-10 mx-auto">
+  <div class="card shadow p-5">
+      <div class="card-content">
+  <p class="card-title"><%= attachment_image_tag @bird, :bird_icon, :fill, 60, 60, fallback: "no_image.jpg", size:'60x60' %>お名前：<%= @bird.bird_name %></p>
+  <%= attachment_image_tag @bird, :bird_back_image, :fill, 400, 400, fallback: "no_image.jpg", size:'500x300' %>
+  <p>種類：<%= @bird.breed.name %>　　年齢：<%= @bird.bird_age %>歳　　飼い主<%= link_to @bird.user.nickname, user_path(@bird.user) %></p>
+  <p>紹介分：<%= @bird.bird_introduction %></p>
+</div>
+<% if user_signed_in? %>
+<% if @bird.user == current_user %>
+  <%= link_to "編集", edit_bird_path(@bird.id), class: "btn btn-success shadow" %>
+<% else %>
+  <% if @bird.checked_by?(current_user) %>
     <p>
-      <%= link_to "お気に入り解除", bird_bird_checks_path(@bird), method: :delete %>
+      <%= link_to "お気に入り解除", bird_bird_checks_path(@bird), method: :delete, class: "btn btn-danger shadow" %>
     </p>
     <% else %>
     <p>
-      <%= link_to "お気に入り", bird_bird_checks_path(@bird), method: :post %>
+      <%= link_to "お気に入り", bird_bird_checks_path(@bird), method: :post, class: "btn btn-success shadow" %>
     </p>
   <% end %>
-<div>
-  <%= attachment_image_tag @bird, :bird_icon, :fill, 60, 60, fallback: "no_image.jpg" %>
-  <%= attachment_image_tag @bird, :bird_back_image, :fill, 200, 200, fallback: "no_image.jpg" %>
-  <p>種類：<%= @bird.breed.name %></p>
-  <p>年齢：<%= @bird.bird_age %></p>
-  <p>紹介分：<%= @bird.bird_introduction %></p>
-  <p>鳥の名前：<%= @bird.bird_name %></p>
-</div>
-<%= link_to "編集", edit_bird_path(@bird.id) %> 
-<div class="comments">
-<p>コメント件数：<%= @bird.bird_comments.count %></p>
-<% @bird.bird_comments.each do |bird_comment| %>
-  <%= bird_comment.user.nickname %>
-  <%= bird_comment.created_at.strftime('%Y/%m/%d') %><%= bird_comment.comment %>
-  <% if bird_comment.user == current_user %>
-  <div class="comment-delete">
-    <%= link_to "削除", bird_bird_comment_path(bird_comment.bird, bird_comment), method: :delete %>
-  </div>
   <% end %>
 <% end %>
 </div>
-<div class="new-comment">
+</div>
+<div class="col-md-10 mx-auto">
+<div class="card shadow pl-5">
+
+      <p>コメント件数：<%= @bird.bird_comments.count %></p>
+<% if user_signed_in? %>
+<div class="new-comment pb-1">
 <%= form_with(model:[@bird, @bird_comment], local: true) do |f| %>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+  <%= f.text_area :comment, rows:'2',placeholder: "コメントをここに" %>
   <%= f.submit "送信する" %>
 <% end %>
+</div>
+<% end %>
+
+<% @bird.bird_comments.each do |bird_comment| %>
+<div class="comments border-top pt-1">
+  <%= bird_comment.user.nickname %>
+  <%= bird_comment.created_at.strftime('%Y/%m/%d') %>
+  <% if bird_comment.user == current_user %>
+    <%= link_to "削除", bird_bird_comment_path(bird_comment.bird, bird_comment), method: :delete, class: "btn btn-danger shadow" %>
+  <% end %>
+  <p><%= bird_comment.comment %></p>
+</div>
+<% end %>
+
+</div>
+</div>
+</div>
 </div>

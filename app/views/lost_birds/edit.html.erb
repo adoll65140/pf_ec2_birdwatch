@@ -1,23 +1,152 @@
-<h1>迷子の鳥編集</h1>
+<div class="row">
+  <div class="col-md-10 mx-auto">
+<h2>迷子の鳥情報編集</h2>
 <%= form_with model: @lost_bird, local:true do |f| %>
-  <h4>名前</h4>
-  <%= f.text_field :lost_bird_name %>
-  <h4>種類</h4>
-  <%= f.collection_select :breed_id, Breed.all, :id, :name, {include_blank: "選択してください"} %>
-  <%= attachment_image_tag @lost_bird, :bird_image, :fill, 60, 60, fallback: "no_image.jpg" %>
-  <h4>画像</h4>
-  <%= f.attachment_field :bird_image %>
-  <h4>場所</h4>
-  <%= f.text_field :lost_place %>
-  <h4>特徴</h4>
-  <%= f.text_field :feature %>
-  <h4>状況説明</h4>
-  <%= f.text_area :lost_introduction %>
-  <h4>年齢</h4>
-  <%= f.text_field :lost_bird_age %>歳
-  <h4>鳥説明</h4>
-  <%= f.text_area :lost_bird_introduction %>
-  <input name="lost_day" type="date" />
-  <%= f.submit '投稿' %>
+<table class='table table-borderless table-sm'>
+ <tbody>
+   <tr>
+      <th>
+        <h4>タイトル</h4>
+      </th>
+      <td>
+        <div class="field">
+          <%= f.text_field :title %>
+        </div>
+      </td>
+    </tr>
+   <tr>
+      <th>
+        <h4>お名前</h4>
+      </th>
+      <td>
+        <div class="field">
+          <%= f.text_field :lost_bird_name %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <h4>種類</h4>
+      </th>
+      <td>
+        <div class="field">
+          <%= f.collection_select :breed_id, Breed.all, :id, :name, {include_blank: "選択してください"} %> 
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <h4>年齢</h4>
+      </th>
+      <td>
+        <div class="field">
+          <%= f.text_field :lost_bird_age %>歳
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <h4>性別</h4>
+      </th>
+      <td>
+        <div class="field">
+          <%= f.label :オス  %>
+          <%= f.radio_button :sex, :オス %>
+          <%= f.label :メス  %>
+          <%= f.radio_button :sex, :メス %>
+          <%= f.label :不明  %>
+          <%= f.radio_button :sex, :不明 %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <h4>写真</h4>
+      </th>
+      <td>
+        <div class="field">
+          <%= f.attachment_field :bird_image %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <h4>地域:都道府県</h4>
+      </th>
+      <td>
+        <div class="field">
+          <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { prompt: '選択してください' }, id: 'prefecture_code' %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <h4>市区町村</h4>
+      </th>
+      <td>
+        <div class="field">
+          <%= f.text_field :lost_place %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <h4>迷子の色</h4>
+      </th>
+      <td>
+        <div class="field">
+          <%= f.text_field :color %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <h4>迷子の特徴</h4>
+      </th>
+      <td>
+        <div class="field">
+          <%= f.text_field :feature %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <h4>その他</h4>
+      </th>
+      <td>
+        <div class="field">
+          <%= f.text_area :lost_bird_introduction %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <h4>迷子になった状況説明</h4>
+      </th>
+      <td>
+        <div class="field">
+          <%= f.text_area :lost_introduction %>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <h4>行方不明日</h4>
+      </th>
+      <td>
+        <div class="field">
+          <%= f.date_field :lost_day %>
+        </div>
+      </td>
+    </tr>
+     <tr>
+      <td><%= link_to "削除", lost_bird_path(@lost_bird), method: :delete,class: "btn btn-danger" %></td>
+        <th><%= f.submit '編集を保存',class: "btn btn-success"%></th>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
 <% end %>
-  <%= link_to "削除", lost_bird_path(@lost_bird), method: :delete %>
+          </div>
+        </div>
+  

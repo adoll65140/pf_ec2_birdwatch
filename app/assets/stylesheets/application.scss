@@ -1,0 +1,90 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import "bootstrap";
+
+.listings {
+  min-height: 100vh;
+  height: 100%;
+  width: 210px;
+  float: left;
+  color: #444444;
+  background-color: #FFFFEE;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-right: double 5px #DDDDDD;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+}
+
+.search{
+  margin: 1rem;
+}
+
+.listings_header {
+  text-align: left;
+  font-size: 1.5rem;
+  line-height: 1.25rem;
+  margin: 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #444444;
+}
+
+.channel_list {
+  padding: 0;
+  list-style-type: none;
+  text-align: left;
+  color: #ab9ba9;
+}
+
+.channel {
+  height: 24px;
+  line-height: 24px;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  padding-right: 17px;
+  color: #AA0000;
+  padding-left: 1rem;
+  a {
+    color:#444444;
+    text-decoration: none;
+    width: 100%;
+    display: inline-block;
+  }
+  a:hover {
+    color: #AA0000;
+  }
+}
+
+.channel.active {
+  color: #FFFFEE;
+  background: #4c9689;
+  a {
+    color: white;
+    text-decoration: none;
+    width: 100%;
+    display: inline-block;
+  }
+  a:hover {
+    color: #AA0000;
+  }
+}
+
+.icon, .bird_icon, fallback{
+  border-radius: 50%;
+  overflow: hidden;
+}

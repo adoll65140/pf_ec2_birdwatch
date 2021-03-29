@@ -1,12 +1,24 @@
-<%= render 'layouts/bird_search', obj:adoptions_path, message:"里親検索" %>
-<% @adoptions.each do |adoption| %>
-<%= link_to adoption_path(adoption.id) do %>
-<div>
-  <p>タイトル：<%= adoption.title %></p>
-  <%= attachment_image_tag adoption, :image, :fill, 60, 60, fallback: "no_image.jpg" %>
- <p>種類：<%= adoption.breed.name %></p>
-  <p>性別：<%= adoption.sex %></p>
-  <p>取引場所：<%= adoption.prefecture_name %><%= adoption.address_city %></p>
+<div class="row">
+  <%= render 'layouts/bird_search', obj:adoptions_path, message:"里親検索" %> <p class="ml-3">募集は</p><%= link_to "こちら", new_adoption_path %>
 </div>
+<div class="row">
+<% @adoptions.each do |adoption| %>
+<div class="col md-3">
+
+<div class="card h-100 shadow m-1", style="width: 15rem;">
+  <div class="card-content px-3">
+    <%= link_to adoption_path(adoption.id) do %>
+  <p class="card-title pt-3"><%= adoption.title %></p>
+  <% end %>
+  <%= attachment_image_tag adoption, :image, :fill, 100, 100, fallback: "no_image.jpg" %>
+  <p>種類：<%= adoption.breed.name %></p>
+  <p>性別：<%= adoption.sex %></p>
+  <p>地域：<%= adoption.prefecture_name %></p>
+</div>
+</div>
+</div>
+
 <% end %>
-<% end %>
+</div>
+<p><%= paginate @adoptions, class: "justify-content-center" %></p>
+</div>

@@ -4,7 +4,7 @@ class LostBirdsController < ApplicationController
   end
 
   def index
-    @lost_birds = LostBird.all
+    @lost_birds = LostBird.all.page(params[:page]).per(6).order(created_at: :desc)
     @lost_birds = @lost_birds.where('breed_id LIKE ?', "#{params[:breed_id]}") if params[:breed_id].present?
     @lost_birds = @lost_birds.where('prefecture_code LIKE ?', "#{params[:prefecture_code]}") if params[:prefecture_code].present?
   end
@@ -41,6 +41,6 @@ class LostBirdsController < ApplicationController
 
   def lost_bird_params
     params.require(:lost_bird).permit(:lost_bird_name, :breed_id, :lost_bird_age, :feature, :lost_introduction, :prefecture_code,
-                                      :lost_bird_introduction, :bird_image, :bird_icon, :lost_place, :title, :color, :sex)
+                                      :lost_bird_introduction, :bird_image, :user, :lost_place, :title, :color, :sex, :lost_day, :prefecture_name)
   end
 end

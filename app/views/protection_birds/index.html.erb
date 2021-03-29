@@ -1,16 +1,24 @@
-<%= render 'layouts/bird_search', obj:protection_birds_path, message:"保護鳥検索" %>
-
+<div class="row">
+  <%= render 'layouts/bird_search', obj:protection_birds_path, message:"保護鳥検索" %><p class="ml-3">投稿は</p><%= link_to "こちら", new_protection_bird_path %>
+</div>
+<div class="row">
 <% @protection_birds.each do |protection_bird| %>
-<%= link_to protection_bird_path(protection_bird.id) do %>
-<div>
-  <%= attachment_image_tag protection_bird, :image, :fill, 200, 200, fallback: "no_image.jpg" %>
-  <p>種類：<%= protection_bird.breed.name %></p>
-  <p>鳥説明：<%= protection_bird.bird_introduction %></p>
-  <p>状況説明：<%= protection_bird.protect_introduction %></p>
-  <p>場所：<%= protection_bird.protect_place %></p>
-  <p>特徴：<%= protection_bird.feature %></p>
-  <p>保護日：<%= protection_bird.protect_day %></p>
-  <p><%= "#{protection_bird.protection_bird_comments.count} コメント" %></p>
+<div class="col md-3">
+<div class="card h-100 shadow m-1", style="width: 15rem;">
+    <div class="card-content px-3">
+    <%= link_to protection_bird_path(protection_bird.id) do %>
+    <p  class="card-title pt-3"><%= protection_bird.title %></p>
+    <% end %>
+    <%= attachment_image_tag protection_bird, :image, :fill, 200, 200, fallback: "no_image.jpg" %>
+    <p>種類：<%= protection_bird.breed.name %></p>
+    <p>地域：<%= protection_bird.prefecture_name %></p>
+    <p>保護日：<%= protection_bird.protect_day %></p>
+  </div>
+</div>
+
 </div>
 <% end %>
-<% end %>
+</div>
+<div>
+<p><%= paginate @protection_birds, class: "justify-content-center" %></p>
+</div>

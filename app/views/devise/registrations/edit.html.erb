@@ -1,10 +1,10 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>ユーザー情報編集</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :新しいemail %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 

@@ -1,17 +1,26 @@
-<%= render 'layouts/bird_search', obj:lost_birds_path, message:"迷子の鳥検索" %>
+<div class="row">
+  <%= render 'layouts/bird_search', obj:lost_birds_path, message:"迷子の鳥検索" %><p class="ml-3">投稿は</p><%= link_to "こちら", new_lost_bird_path %>
+</div>
+<div class="row">
 <% @lost_birds.each do |lost_bird| %>
-<%= link_to lost_bird_path(lost_bird.id) do %>
-<div>
+<div class="col md-3">
+
+<div class="card h-100 shadow m-1", style="width: 15rem;">
+  <div class="card-content px-3">
+    <%= link_to lost_bird_path(lost_bird.id) do %>
+      <p class="card-title pt-3"><%= lost_bird.title %></p>
+    <% end %>
   <%= attachment_image_tag lost_bird, :bird_image, :fill, 200, 200, fallback: "no_image.jpg" %>
   <p>種類：<%= lost_bird.breed.name %></p>
-  <p>年齢：<%= lost_bird.lost_bird_age %></p>
-  <p>鳥説明：<%= lost_bird.lost_bird_introduction %></p>
-  <p>状況説明：<%= lost_bird.lost_introduction %></p>
-  <p>場所：<%= lost_bird.lost_place %></p>
-  <p>特徴：<%= lost_bird.feature %></p>
+  <p>地域：<%= lost_bird.prefecture_name %></p>
   <p>行方不明日：<%= lost_bird.lost_day %></p>
   <p>鳥の名前：<%= lost_bird.lost_bird_name %></p>
-  <p><%= "#{lost_bird.lost_bird_comments.count} コメント" %></p>
+</div>
+</div>
+
 </div>
 <% end %>
-<% end %>
+</div>
+<div>
+<p><%= paginate @lost_birds, class: "justify-content-center" %></p>
+</div>

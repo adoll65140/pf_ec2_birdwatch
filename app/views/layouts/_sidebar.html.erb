@@ -1,0 +1,47 @@
+<div class="listings fixed">
+  <div class="listings_channels">
+    <h2 class="listings_header">birdwatch</h2>
+    <div class="search">
+  <%= form_tag(search_path, method: :get) do %>
+    <%= text_field_tag (:search) %><br>
+    <%= select_tag :model, options_for_select({ "ユーザー" => "user", "投稿" => "post", "鳥" => "bird" }) %>
+    <%= submit_tag :"検索" %>
+  <% end %>
+  </div>
+  <% if user_signed_in? %>
+   <ul class="channel_list">
+      <%= sidebar_link_item('一覧', posts_path) %>
+      <%= sidebar_link_item('home', home_path) %>
+      <%= sidebar_link_item('メッセージ', rooms_path) %>
+      <%= sidebar_link_item('気になる子', check_path) %>
+      <%= sidebar_link_item('迷子情報', lost_birds_path) %>
+      <%= sidebar_link_item('保護情報', protection_birds_path) %>
+      <%= sidebar_link_item('里親募集', adoptions_path) %>
+      <%= sidebar_link_item('不用品', items_path) %>
+      <%= sidebar_link_item('マイページ', user_path(current_user.id)) %>
+      <%= sidebar_link_item('設定', edit_user_registration_path) %>
+    </ul>
+    <div class="mx-auto">
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-success shadow" %>
+    </div>
+    <table class="profile">
+    <tr><%= attachment_image_tag current_user, :icon, :fill, 60, 60, fallback: "no_image.jpg" %></tr>
+	  <tr>
+	    <%= current_user.nickname %>
+	  </tr>
+	 </table>
+    
+    <% else %>
+    <ul class="channel_list">
+      <%= sidebar_link_item('一覧', posts_path) %>
+      <%= sidebar_link_item('迷子情報', lost_birds_path) %>
+      <%= sidebar_link_item('保護情報', protection_birds_path) %>
+      <%= sidebar_link_item('里親募集', adoptions_path) %>
+      <%= sidebar_link_item('不用品', items_path) %>
+      <%= sidebar_link_item("新規登録", new_user_registration_path) %>
+      <%= sidebar_link_item("ログイン", new_user_session_path) %>
+    </ul>
+    <% end %>
+  </div>
+</div>
+

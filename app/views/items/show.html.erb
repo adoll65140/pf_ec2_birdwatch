@@ -1,25 +1,29 @@
-<%= render 'search', message:"不用品検索" %>
-<div>
-  <p>タイトル：<%= @item.item %></p>
-  <%= attachment_image_tag @item, :image, :fill, 60, 60, fallback: "no_image.jpg" %>
+<div class="col-md-10 mx-auto">
+  <h2>不用品引取の募集</h2>
+</div>
+<div class="col-md-10 mx-auto">
+  <div class="card shadow p-4">
+        <div class="card-content">
+          <h3 class="card-title font-weight-bold p-2"><%= @item.item %></h3>
+  <%= attachment_image_tag @item, :image, :fill, 300, 300, fallback: "no_image.jpg" %>
+  <p class="pt-2">投稿主：<%= link_to @item.user.nickname, user_path(@item.user) %></p>
+  <p>ジャンル：<%= @item.genre.name %>　　　地域：<%= @item.prefecture_name %><%= @item.address_city %></p>
   <p>説明：<%= @item.introduction %></p>
-  <p>取引場所：<%= @item.address_city %><%= @item.prefecture_name %></p>
-  <p>ジャンル：<%= @item.genre.name %></p>
+  <% if user_signed_in? %>
   <% if @item.user.id == current_user.id %>
-    <%= @msg %>
+  <%= link_to "編集", edit_item_path(@item.id),class: "btn btn-success" %> 
   <% else %>
     <% if @isRoom == true %>
-        <p><%= link_to 'DMへ', room_path(@roomId) %></p>
+        <p><%= link_to 'DMへ', room_path(@roomId),class: "btn btn-success" %></p>
     <% else %>
         <%= form_for @room do |f| %>
             <%= fields_for @entry do |e|%>
                 <% e.hidden_field :user_id, value: @item.user.id %>
             <% end %>
-        <%= f.submit "DMを開始する"%>
+        <%= f.submit "DMを開始する",class: "btn btn-success"%>
         <% end %>
     <% end %>
 <% end %>
-  <%= link_to "編集", edit_item_path(@item.id) %> 
-  <%= link_to "削除", item_path(@item), method: :delete %>
-  
+<% end %>
+</div>
 </div>

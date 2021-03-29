@@ -1,40 +1,57 @@
-<%= render 'layouts/bird_search', obj:protection_birds_path, message:"保護鳥検索" %>
-<% if @protection_bird.checked_by?(current_user) %>
-    <p>
-      <%= link_to "気になる　解除", protection_bird_protection_checks_path(@protection_bird), method: :delete %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to "気になる", protection_bird_protection_checks_path(@protection_bird), method: :post %>
-    </p>
-  <% end %>
-<div>
-<div>
-  <%= attachment_image_tag @protection_bird, :image, :fill, 200, 200, fallback: "no_image.jpg" %>
-  <p>種類：<%= @protection_bird.breed.name %></p>
-  <p>鳥説明：<%= @protection_bird.bird_introduction %></p>
-  <p>状況説明：<%= @protection_bird.protect_introduction %></p>
-  <p>場所：<%= @protection_bird.protect_place %></p>
-  <p>特徴：<%= @protection_bird.feature %></p>
-  <p>保護日：<%= @protection_bird.protect_day %></p>
+<div class="col-md-10 mx-auto">
+  <h2>保護鳥の情報</h2>
 </div>
-<%= link_to "編集", edit_protection_bird_path(@protection_bird.id) %>
-
+<div class="col-md-10 mx-auto">
+      <div class="card shadow p-4">
+            <div class="card-content">
+              <h3 class="card-title font-weight-bold p-2"><%= @protection_bird.title %></h3>
+  <%= attachment_image_tag @protection_bird, :image, :fill, 200, 200, fallback: "no_image.jpg" %>
+  <p>種類：<%= @protection_bird.breed.name %>　　保護日：<%= @protection_bird.protect_day %></p>
+  <p>性別：<%= @protection_bird.sex %>　　色：<%= @protection_bird.color %></p>
+  <p>投稿主：<%= link_to @protection_bird.user.nickname, user_path(@protection_bird.user) %></p>
+  <p>特徴：<%= @protection_bird.feature %></p>
+  <p>その他：<%= @protection_bird.bird_introduction %></p>
+  <p>状況説明：<%= @protection_bird.protect_introduction %></p>
+  <p>場所：<%= @protection_bird.prefecture_name %><%= @protection_bird.protect_place %></p>
+  
+</div>
+<% if user_signed_in? %>
+  <% if @protection_bird.user == current_user %>
+    <%= link_to "編集", edit_protection_bird_path(@protection_bird.id), class: "btn btn-success shadow" %>
+  <% else %>
+    <% if @protection_bird.checked_by?(current_user) %>
+      <p>
+        <%= link_to "気になる　解除", protection_bird_protection_checks_path(@protection_bird), method: :delete, class: "btn btn-damger shadow" %>
+      </p>
+    <% else %>
+      <p>
+        <%= link_to "気になる", protection_bird_protection_checks_path(@protection_bird), method: :post, class: "btn btn-success shadow" %>
+      </p>
+    <% end %>
+  <% end %>
+<% end %>
+</div>
+</div>
+<div class="col-md-10 mx-auto">
+<div class="card shadow pl-4">
+  <p>コメント件数：<%= @protection_bird.protection_bird_comments.count %></p>
+<% if user_signed_in? %>
 <div class="new-comment">
 <%= form_with(model:[@protection_bird, @protection_bird_comment], local: true) do |f| %>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+  <%= f.text_area :comment, rows:'2',placeholder: "コメントをここに" %>
   <%= f.submit "送信する" %>
 <% end %>
 </div>
-<div class="comments">
-<p>コメント件数：<%= @protection_bird.protection_bird_comments.count %></p>
+<% end %>
+
 <% @protection_bird.protection_bird_comments.each do |protection_bird_comment| %>
+<div class="comments border-top pt-1">
   <%= protection_bird_comment.user.nickname %>
-  <%= protection_bird_comment.created_at.strftime('%Y/%m/%d') %><%= protection_bird_comment.comment %>
+  <%= protection_bird_comment.created_at.strftime('%Y/%m/%d') %>
   <% if protection_bird_comment.user == current_user %>
-  <div class="comment-delete">
-    <%= link_to "削除", protection_bird_protection_bird_comment_path(protection_bird_comment.protection_bird, protection_bird_comment), method: :delete %>
-  </div>
+    <%= link_to "削除", protection_bird_protection_bird_comment_path(protection_bird_comment.protection_bird, protection_bird_comment), method: :delete, class: "btn btn-danger shadow" %>
   <% end %>
+  <p><%= protection_bird_comment.comment %></p
+></div>
 <% end %>
 </div>

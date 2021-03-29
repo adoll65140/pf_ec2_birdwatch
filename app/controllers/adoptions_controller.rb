@@ -1,6 +1,6 @@
 class AdoptionsController < ApplicationController
   def index
-    @adoptions = Adoption.all
+    @adoptions = Adoption.all.page(params[:page]).per(6).order(created_at: :desc)
     @adoptions = @adoptions.where('breed_id LIKE ?', "#{params[:breed_id]}") if params[:breed_id].present?
     @adoptions = @adoptions.where('prefecture_code LIKE ?', "#{params[:prefecture_code]}") if params[:prefecture_code].present?
   end
@@ -17,6 +17,7 @@ class AdoptionsController < ApplicationController
 
   def show
     @adoption = Adoption.find(params[:id])
+    if user_signed_in?
     @currentUserEntry=Entry.where(user_id: current_user.id)
     @userEntry=Entry.where(user_id: @adoption.user.id)
     if @adoption.user.id == current_user.id
@@ -34,6 +35,7 @@ class AdoptionsController < ApplicationController
         @room = Room.new
         @entry = Entry.new
       end
+    end
     end
   end
 

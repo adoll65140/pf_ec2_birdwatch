@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def index
-    @items = Item.all
+    @items = Item.all.page(params[:page]).per(6).order(created_at: :desc)
     @items = @items.where('genre_id LIKE ?', "#{params[:genre_id]}") if params[:genre_id].present?
     @items = @items.where('prefecture_code LIKE ?', "#{params[:prefecture_code]}") if params[:prefecture_code].present?
   end
@@ -17,6 +17,7 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    if user_signed_in?
     @currentUserEntry=Entry.where(user_id: current_user.id)
     @userEntry=Entry.where(user_id: @item.user.id)
     unless @item.user.id == current_user.id
@@ -32,6 +33,7 @@ class ItemsController < ApplicationController
         @room = Room.new
         @entry = Entry.new
       end
+    end
     end
   end
 

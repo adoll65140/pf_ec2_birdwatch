@@ -1,49 +1,81 @@
 <% if @bird_list.present? %>
+<div class="col-md-10 mx-auto">
+  <h2>鳥のお気に入り</h2>
+</div>
   <% @bird_list.each do |bird| %>
-  <%= link_to bird_path(bird.id) do %>
-  <div>
-    <%= attachment_image_tag bird, :bird_icon, :fill, 60, 60, fallback: "no_image.jpg" %>
-    <%= attachment_image_tag bird, :bird_back_image, :fill, 200, 200, fallback: "no_image.jpg" %>
-    <p>種類：<%= bird.breed.name %></p>
-    <p>年齢：<%= bird.bird_age %></p>
+  <div class="col-md-10 mx-auto">
+  <div class="card shadow p-5">
+      <div class="card-content">
+        <p>
+          <%= attachment_image_tag bird, :bird_icon, :fill, 60, 60, fallback: "no_image.jpg", size:'60x60' %>お名前：
+          <%= link_to bird_path(bird.id) do %>
+            <%= bird.bird_name %>
+          <% end %>
+        </p>
+    <p>年齢：<%= bird.bird_age %>歳</p>
     <p>紹介分：<%= bird.bird_introduction %></p>
-    <p>鳥の名前：<%= bird.bird_name %></p>
     <p><%= "#{bird.bird_comments.count} コメント" %></p>
   </div>
+  </div>
+  </div>
   <% end %>
-  <% end %>
+ <% else %>
+ <div class="col-md-10 mx-auto">
+ <h2>鳥のお気に入りはありません</h2>
+ </div>
 <% end %>
 <% if @lost_list.present? %>
+<div class="col-md-10 mx-auto">
+  <h2>気になる迷子</h2>
+</div>
   <% @lost_list.each do |lost_bird| %>
+   <div class="col-md-10 mx-auto">
+  <div class="card shadow p-5">
+      <div class="card-content">
   <%= link_to lost_bird_path(lost_bird.id) do %>
+    <p class="card-title pt-3"><%= lost_bird.title %></p>
+  <% end %>
   <div>
     <%= attachment_image_tag lost_bird, :bird_image, :fill, 200, 200, fallback: "no_image.jpg" %>
     <p>種類：<%= lost_bird.breed.name %></p>
-    <p>年齢：<%= lost_bird.lost_bird_age %></p>
-    <p>鳥説明：<%= lost_bird.lost_bird_introduction %></p>
-    <p>状況説明：<%= lost_bird.lost_introduction %></p>
-    <p>場所：<%= lost_bird.lost_place %></p>
-    <p>特徴：<%= lost_bird.feature %></p>
+    <p>地域：<%= lost_bird.prefecture_name %></p>
     <p>行方不明日：<%= lost_bird.lost_day %></p>
     <p>鳥の名前：<%= lost_bird.lost_bird_name %></p>
     <p><%= "#{lost_bird.lost_bird_comments.count} コメント" %></p>
   </div>
+   </div>
+  </div>
+  </div>
   <% end %>
-  <% end %>
+  <% else %>
+  <div class="col-md-10 mx-auto">
+ <h2>気になる迷子はありません</h2>
+ </div>
 <% end %>
 <% if @protection_list.present? %>
+<div class="col-md-10 mx-auto">
+  <h2>気になる保護鳥</h2>
+</div>
   <% @protection_list.each do |protection_bird| %>
+   <div class="col-md-10 mx-auto">
+  <div class="card shadow p-5">
+      <div class="card-content">
   <%= link_to protection_bird_path(protection_bird.id) do %>
+  <p  class="card-title pt-3"><%= protection_bird.title %></p>
+  <% end %>
   <div>
     <%= attachment_image_tag protection_bird, :image, :fill, 200, 200, fallback: "no_image.jpg" %>
     <p>種類：<%= protection_bird.breed.name %></p>
-    <p>鳥説明：<%= protection_bird.bird_introduction %></p>
-    <p>状況説明：<%= protection_bird.protect_introduction %></p>
-    <p>場所：<%= protection_bird.protect_place %></p>
-    <p>特徴：<%= protection_bird.feature %></p>
+    <p>地域：<%= protection_bird.prefecture_name %></p>
     <p>保護日：<%= protection_bird.protect_day %></p>
     <p><%= "#{protection_bird.protection_bird_comments.count} コメント" %></p>
   </div>
+   </div>
+  </div>
+  </div>
   <% end %>
-  <% end %>
+  <% else %>
+  <div class="col-md-10 mx-auto">
+ <h2>気になる保護鳥はありません</h2>
+ </div>
 <% end %>

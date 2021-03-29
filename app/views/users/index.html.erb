@@ -1,0 +1,16 @@
+<div class="col-md-10 mx-auto">
+  <h2>ユーザ一覧</h2><%= link_to "鳥一覧", birds_path, class: "mr-3"%><%= link_to "投稿一覧", posts_path %>
+</div>
+  <% @users.each do |user| %>
+  <div class="col-md-10 mx-auto">
+  <div class="card shadow p-5">
+      <div class="card-content">
+    <%= link_to user_path(user.id) do %>
+      <%= attachment_image_tag @user, :icon, :fill, 60, 60, fallback: "no_image.jpg" %>
+      <%= user.nickname %>
+    <% end %>
+      <%= user.introduction %>
+    </div>
+  </div>
+  </div>
+  <% end %>

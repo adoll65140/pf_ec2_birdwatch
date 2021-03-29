@@ -1,12 +1,25 @@
-<p>アイコン:<%= attachment_image_tag @user, :icon, :fill, 60, 60, fallback: "no_image.jpg" %></p>
-  <p>背景:<%= attachment_image_tag @user, :back_image, :fill, 60, 60, fallback: "no_image.jpg" %></p>
-  <p>ユーザー名：<%= @user.nickname %></p>
-  <p>説明：<%= @user.introduction %></p>
+<div class="col-md-10 mx-auto">
+  <div class="card shadow p-5">
+      <div class="card-content">
+<p><%= attachment_image_tag @user, :icon, :fill, 60, 60, fallback: "no_image.jpg", size:'60x60'%><%= @user.nickname %></p>
+  <p><%= @user.introduction %></p>
+  <% if user_signed_in? %>
+  <p><%= link_to follower_user_path(@user.id) do %>フォロー数:<%= @user.follower.count %><% end %>
+  <%= link_to follower_user_path(@user.id) do %>フォロワー数:<%= @user.followed.count %><% end %>
+          <% unless @user == current_user %>
+            <% if current_user.following?(@user) %>
+              <%= link_to 'フォロー解除', unfollow_path(@user.id), method: :POST, class: "btn btn-danger shadow" %>
+            <% else %>
+              <%= link_to 'フォロー', follow_path(@user.id), method: :POST, class: "btn btn-success shadow" %>
+            <% end %>
+          <% end %>
+          </p>
+
   <% if @user.id == current_user.id %>
-    <%= @msg %>
+    <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-success shadow" %>
   <% else %>
     <% if @isRoom == true %>
-        <p><%= link_to 'DMへ', room_path(@roomId) %></p>
+        <p><%= link_to 'DMへ', room_path(@roomId), class: "btn btn-success shadow" %></p>
     <% else %>
         <%= form_for @room do |f| %>
             <%= fields_for @entry do |e|%>
@@ -16,31 +29,51 @@
         <% end %>
     <% end %>
 <% end %>
-<td>フォロー数:<%= @user.follower.count %></td>
-        <td>フォロワー数:<%= @user.followed.count %></td>
-        <td>
-          <% unless @user == current_user %>
-            <% if current_user.following?(@user) %>
-              <%= link_to 'フォロー外す', unfollow_path(@user.id), method: :POST %>
-            <% else %>
-              <%= link_to 'フォローする', follow_path(@user.id), method: :POST %>
-            <% end %>
-          <% end %>
-        </td>
+<% end %>
+<p class="pt-3">飼っている子たち
+<% if user_signed_in? %>
+<% if @user.id == current_user.id %>
+<%= link_to "追加", new_bird_path %>
+ <% end %>
+ <% end %>
+</p>
+<% @birds.each do |bird| %>
+    <%= link_to bird_path(bird.id) do %>
+    <div>
+      <p><%= attachment_image_tag bird, :bird_icon, :fill, 60, 60, fallback: "no_image.jpg" %>
+      <% end %>
+      鳥のお名前：<%= link_to bird_path(bird.id) do %><%= bird.bird_name %></p>
+    </div>
+   <% end %>
+  <% end %>
+  <%= paginate @birds, class: "justify-content-center" %>
 </div>
-  <%= link_to "編集", edit_user_path(@user.id) %>
-  <%= link_to "鳥追加", new_bird_path %>
-  <%= link_to "鳥一覧", birds_path %>
-  <%= link_to "迷子追加", new_lost_bird_path %>
-  <%= link_to "迷子一覧", lost_birds_path(current_user.id) %>
-  <%= link_to "保護鳥追加", new_protection_bird_path %>
-  <%= link_to "保護鳥一覧", protection_birds_path(current_user.id) %>
-  <%= link_to "里親鳥追加", new_adoption_path %>
-  <%= link_to "里親一覧", adoptions_path(@user.id) %>
-  <%= link_to "種類追加", breeds_path %>
-  <%= link_to "ジャンル追加", genres_path %>
-  <%= link_to "不用品追加", new_item_path %>
-  <%= link_to "一覧", items_path(current_user.id) %>
+</div>
+</div>
+<div class="col-md-10 mx-auto">
+        <h2>投稿一覧</h2>
+        </div>
+<% @user.posts.each do |post| %>
+<div class="col-md-10 mx-auto">
+  <div class="card shadow p-5">
+      <div class="card-content">
+  <% if post.user == current_user %>
+  <%= link_to '消去', post_path(post), method: :delete, class: "btn btn-danger shadow"%>
+  <% end %>
+<%= link_to post_path(post.id) do %>
+  <p>タイトル：<%= post.title %></p>
+  <% end %>
+  <%= attachment_image_tag post, :image, :fill, 200, 200 %>
+  <p>内容：<%= post.body %></p>
+ <p><%= "#{post.post_comments.count} コメント" %></p>
+</div>
+</div>
+</div>
+<% end %>
+
+
+
+
 
 
 

@@ -1,13 +1,22 @@
-<% @birds.each do |bird| %>
-<%= link_to bird_path(bird.id) do %>
-<div>
-  <%= attachment_image_tag bird, :bird_icon, :fill, 60, 60, fallback: "no_image.jpg" %>
-  <%= attachment_image_tag bird, :bird_back_image, :fill, 200, 200, fallback: "no_image.jpg" %>
-  <p>種類：<%= bird.breed.name %></p>
-  <p>年齢：<%= bird.bird_age %></p>
-  <p>紹介分：<%= bird.bird_introduction %></p>
-  <p>鳥の名前：<%= bird.bird_name %></p>
-  <p><%= "#{bird.bird_comments.count} コメント" %></p>
-</div>
-<% end %>
-<% end %>
+  <div class="col-md-10 mx-auto">
+    <h2>鳥一覧</h2><%= link_to "投稿一覧", posts_path, class: "mr-3"%><%= link_to "ユーザ一覧", users_path %>
+  </div>
+  <% @birds.each do |bird| %>
+  <div class="col-md-10 mx-auto">
+  <div class="card shadow p-5">
+      <div class="card-content">
+        <p>
+          <%= link_to bird_path(bird.id) do %>
+          <%= attachment_image_tag bird, :bird_icon, :fill, 60, 60, fallback: "no_image.jpg", size:'60x60' %><% end %>
+          お名前：<%= link_to bird_path(bird.id) do %>
+            <%= bird.bird_name %>
+          <% end %>
+        </p>
+    <p>年齢：<%= bird.bird_age %>歳</p>
+    <p>紹介分：<%= bird.bird_introduction %></p>
+    <p><%= "#{bird.bird_comments.count} コメント" %></p>
+  </div>
+  </div>
+  </div>
+   
+  <% end %>

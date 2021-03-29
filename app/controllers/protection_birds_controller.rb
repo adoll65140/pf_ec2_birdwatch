@@ -4,7 +4,7 @@ class ProtectionBirdsController < ApplicationController
   end
 
   def index
-    @protection_birds = ProtectionBird.all
+    @protection_birds = ProtectionBird.all.page(params[:page]).per(6).order(created_at: :desc)
     @protection_birds = @protection_birds.where('breed_id LIKE ?', "#{params[:breed_id]}") if params[:breed_id].present?
     @protection_birds = @protection_birds.where('prefecture_code LIKE ?', "#{params[:prefecture_code]}") if params[:prefecture_code].present?
   end

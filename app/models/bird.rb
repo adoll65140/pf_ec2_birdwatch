@@ -3,7 +3,6 @@ class Bird < ApplicationRecord
   belongs_to :breed, optional: true
   has_many :bird_comments, dependent: :destroy
   has_many :bird_checks, dependent: :destroy
-  has_many :notifications, dependent: :destroy
 
   attachment :bird_icon
   attachment :bird_back_image

@@ -3,7 +3,6 @@ class LostBird < ApplicationRecord
   belongs_to :breed, optional: true
   has_many :lost_bird_comments, dependent: :destroy
   has_many :lost_checks, dependent: :destroy
-  belongs_to :prefecture
 
   attachment :bird_image
 
@@ -21,6 +20,14 @@ class LostBird < ApplicationRecord
 
   def checked_by?(user)
     lost_checks.where(user_id: user.id).exists?
+  end
+  
+  def prefecture_name
+    JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
+  end
+
+  def prefecture_name=(prefecture_name)
+    self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
 
 end

@@ -1,41 +1,58 @@
-<%= render 'layouts/bird_search', obj:lost_birds_path, message:"迷子の鳥検索" %>
-<% if @lost_bird.checked_by?(current_user) %>
-    <p>
-      <%= link_to "気になる　解除", lost_bird_lost_checks_path(@lost_bird), method: :delete %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to "気になる", lost_bird_lost_checks_path(@lost_bird), method: :post %>
-    </p>
-  <% end %>
-<div>
+<div class="col-md-10 mx-auto">
+  <h2>迷子の情報</h2>
+</div>
+<div class="col-md-10 mx-auto">
+      <div class="card shadow p-4">
+            <div class="card-content">
+  <h3 class="card-title font-weight-bold p-2"><%= @lost_bird.title %></h3>
   <%= attachment_image_tag @lost_bird, :bird_image, :fill, 200, 200, fallback: "no_image.jpg" %>
-  <p>種類：<%= @lost_bird.breed.name %></p>
-  <p>年齢：<%= @lost_bird.lost_bird_age %></p>
-  <p>鳥説明：<%= @lost_bird.lost_bird_introduction %></p>
-  <p>状況説明：<%= @lost_bird.lost_introduction %></p>
-  <p>場所：<%= @lost_bird.lost_place %></p>
+  <p>鳥の名前：<%= @lost_bird.lost_bird_name %>　　行方不明日：<%= @lost_bird.lost_day %>　　種類：<%= @lost_bird.breed.name %></p>
+  <p>投稿主：<%= link_to @lost_bird.user.nickname, user_path(@lost_bird.user) %></p>
+  <p>性別：<%= @lost_bird.sex %>　　年齢：<%= @lost_bird.lost_bird_age %>歳　　色：<%= @lost_bird.color %></p>
+  <p>地域：<%= @lost_bird.prefecture_name %><%= @lost_bird.lost_place %></p>
   <p>特徴：<%= @lost_bird.feature %></p>
-  <p>行方不明日：<%= @lost_bird.lost_day %></p>
-  <p>鳥の名前：<%= @lost_bird.lost_bird_name %></p>
+  <p>その他：<%= @lost_bird.lost_bird_introduction %></p>
+  <p>迷子になった状況説明：<%= @lost_bird.lost_introduction %></p>
 </div>
-<%= link_to "編集", edit_lost_bird_path(@lost_bird.id) %> 
-
-<div class="new-comment">
-<%= form_with(model:[@lost_bird, @lost_bird_comment], local: true) do |f| %>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-  <%= f.submit "送信する" %>
-<% end %>
-</div>
-<div class="comments">
-<p>コメント件数：<%= @lost_bird.lost_bird_comments.count %></p>
-<% @lost_bird.lost_bird_comments.each do |lost_bird_comment| %>
-  <%= lost_bird_comment.user.nickname %>
-  <%= lost_bird_comment.created_at.strftime('%Y/%m/%d') %><%= lost_bird_comment.comment %>
-  <% if lost_bird_comment.user == current_user %>
-  <div class="comment-delete">
-    <%= link_to "削除", lost_bird_lost_bird_comment_path(lost_bird_comment.lost_bird, lost_bird_comment), method: :delete %>
-  </div>
+<% if user_signed_in? %>
+  <% if @lost_bird.user == current_user %>
+    <%= link_to "編集", edit_lost_bird_path(@lost_bird.id), class: "btn btn-success shadow" %>
+  <% else %>
+    <% if @lost_bird.checked_by?(current_user) %>
+      <p>
+        <%= link_to "気になる　解除", lost_bird_lost_checks_path(@lost_bird), method: :delete, class: "btn btn-damger shadow" %>
+      </p>
+    <% else %>
+      <p>
+        <%= link_to "気になる", lost_bird_lost_checks_path(@lost_bird), method: :post,class: "btn btn-success shadow" %>
+      </p>
+    <% end %>
   <% end %>
 <% end %>
+</div>
+</div>
+<div class="col-md-10 mx-auto">
+<div class="card shadow pl-4">
+  <p>コメント件数：<%= @lost_bird.lost_bird_comments.count %></p>
+<% if user_signed_in? %>
+  <div class="new-comment">
+    <%= form_with(model:[@lost_bird, @lost_bird_comment], local: true) do |f| %>
+      <%= f.text_area :comment, rows:'2',placeholder: "コメントをここに" %>
+      <%= f.submit "送信する" %>
+    <% end %>
+  </div>
+<% end %>
+
+<% @lost_bird.lost_bird_comments.each do |lost_bird_comment| %>
+<div class="comments border-top pt-1">
+  <%= lost_bird_comment.user.nickname %>
+  <%= lost_bird_comment.created_at.strftime('%Y/%m/%d') %>
+  <% if lost_bird_comment.user == current_user %>
+    <%= link_to "削除", lost_bird_lost_bird_comment_path(lost_bird_comment.lost_bird, lost_bird_comment), method: :delete, class: "btn btn-danger shadow" %>
+  <% end %>
+
+  <p><%= lost_bird_comment.comment %></p></div>
+<% end %>
+
+</div>
 </div>

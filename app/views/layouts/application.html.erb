@@ -10,15 +10,16 @@
   </head>
 
   <body>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-2">
-        <%= render 'layouts/left_side_bar' %>
-        </div>
-        <div class="col-8">
-          <%= yield %>
-        </div>
-      </div>
+    
+  <div class="row">
+    <div class="col-3">
+      <%= render'layouts/sidebar' %>
     </div>
-  </body>
+    <div class="col-9">
+      <div class="container">
+        <br>
+      <%= yield %>
+    </div>
+    </div>
+</body>
 </html>
