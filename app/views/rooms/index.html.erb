@@ -1,6 +1,12 @@
 <%  @rooms.each do |room| %>
+<div class="col-md-10 mx-auto">
+  <div class="card shadow p-5">
+      <div class="card-content">
   <%= link_to room_path(room), class: "dm_list__content__link" do %>
-    <%= opponent_user(room) %>とのDM<br>
-    <%= most_new_message_preview(room) %>
-  <% end %>
+    <p><%= opponent_user(room) %><% end %>さんとのDM </p>
+    <p>最新のメッセージ</p><%= most_new_message_preview(room) %>
+
+   </div>
+  </div>
+  </div>
 <% end %>

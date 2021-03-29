@@ -1,5 +1,5 @@
 <div class="row">
-<%= render 'search', message:"不用品検索" %>
+<%= render 'search', message:"不用品検索" %><p class="ml-3">投稿は</p><%= link_to "こちら", new_item_path %>
 </div>
 <div class="row">
 <% @items.each do |item| %>

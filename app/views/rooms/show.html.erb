@@ -1,20 +1,35 @@
 <div class="user-in">
+  <div class="col-md-10 mx-auto">
+    <h2>DM</h2>
+    </div>
 <% @entries.each do |e| %>
-    <h3><strong><a href="/users/<%= e.user.id %>"><%= e.user.nickname%></a></strong></h3>
+<div class="col-md-10 mx-auto">
+  <h3><strong><a href="/users/<%= e.user.id %>"><%= e.user.nickname%></a></strong></h3>
+</div>
 <% end %>
-<p>️dm</p>
+
+
 </div>
 
 <div class="dmMain">
-    <% @messages.each do |m| %>
-        <strong><%= m.message %></strong>
-        <small><%= m.user.nickname %>さん</small><hr>
-    <% end %>
-
+<div class="col-md-10 mx-auto">
     <%= form_for @message do |f| %>
     <%= f.text_field :message, :placeholder => "メッセージを入力して下さい" , :size => 100 %>
     <%= f.hidden_field :room_id, :value => @room.id %>
     <br>
     <%= f.submit "送信する" %>
     <% end %>
+     </div>
+    <% @messages.each do |m| %>
+    <div class="col-md-10 mx-auto">
+  <div class="card shadow p-5">
+      <div class="card-content">
+        <strong><%= m.message %></strong>
+        <small><%= m.user.nickname %>さん</small><hr>
+         </div>
+  </div>
+  </div>
+    <% end %>
+
+
 </div>
