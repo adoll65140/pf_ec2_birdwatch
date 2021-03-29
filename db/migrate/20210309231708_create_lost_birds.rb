@@ -1,9 +1,8 @@
 class CreateLostBirds < ActiveRecord::Migration[5.2]
   def change
     create_table :lost_birds do |t|
-      
+    
     t.string "lost_bird_name"
-    t.string "lost_bird_breed"
     t.text "lost_bird_introduction"
     t.string "bird_image_id"
     t.date "lost_day"
@@ -12,6 +11,12 @@ class CreateLostBirds < ActiveRecord::Migration[5.2]
     t.string "lost_place"
     t.text "feature"
     t.text "lost_introduction"
+    t.boolean "flag", default: true
+    t.integer "breed_id"
+    t.string "title"
+    t.string "color"
+    t.integer "prefecture_code"
+    t.integer "sex"
 
     t.timestamps
     end

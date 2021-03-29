@@ -40,11 +40,8 @@ ActiveRecord::Schema.define(version: 2021_03_27_180025) do
     t.text "other"
     t.text "background"
     t.boolean "flag", default: true
-    t.integer "postcode"
     t.integer "prefecture_code"
     t.string "address_city"
-    t.string "address_street"
-    t.string "address_building"
     t.string "image_id"
     t.integer "breed_id"
     t.integer "user_id"
@@ -77,10 +74,10 @@ ActiveRecord::Schema.define(version: 2021_03_27_180025) do
     t.string "bird_back_image_id"
     t.integer "bird_age"
     t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "breed_id"
     t.integer "sex"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "breeds", force: :cascade do |t|
@@ -108,11 +105,8 @@ ActiveRecord::Schema.define(version: 2021_03_27_180025) do
     t.string "item"
     t.text "introduction"
     t.boolean "flag", default: true
-    t.integer "postcode"
     t.integer "prefecture_code"
     t.string "address_city"
-    t.string "address_street"
-    t.string "address_building"
     t.string "image_id"
     t.integer "genre_id"
     t.integer "user_id"
@@ -145,14 +139,14 @@ ActiveRecord::Schema.define(version: 2021_03_27_180025) do
     t.string "lost_place"
     t.text "feature"
     t.text "lost_introduction"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.boolean "flag", default: true
     t.integer "breed_id"
     t.string "title"
     t.string "color"
     t.integer "prefecture_code"
     t.integer "sex"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "lost_checks", force: :cascade do |t|
@@ -172,17 +166,6 @@ ActiveRecord::Schema.define(version: 2021_03_27_180025) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "notifications", force: :cascade do |t|
-    t.integer "visitor_id"
-    t.integer "visited_id"
-    t.integer "room_id"
-    t.integer "message_id"
-    t.string "action"
-    t.boolean "checked"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "post_comments", force: :cascade do |t|
     t.text "comment"
     t.integer "user_id"
@@ -194,7 +177,7 @@ ActiveRecord::Schema.define(version: 2021_03_27_180025) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.integer "bird_id"
-    t.integer "genre_id"
+    t.integer "category_id"
     t.text "body"
     t.string "image_id"
     t.integer "user_id"
@@ -221,11 +204,11 @@ ActiveRecord::Schema.define(version: 2021_03_27_180025) do
     t.text "feature"
     t.text "protect_introduction"
     t.boolean "flag", default: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "breed_id"
     t.integer "prefecture_code"
     t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "protection_checks", force: :cascade do |t|
@@ -253,12 +236,6 @@ ActiveRecord::Schema.define(version: 2021_03_27_180025) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "last_name"
-    t.string "first_name"
-    t.string "last_name_kana"
-    t.string "first_name_kana"
-    t.string "postal_code"
-    t.string "address"
     t.string "telephone_number"
     t.boolean "is_deleted", default: false
     t.string "nickname"

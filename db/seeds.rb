@@ -7,13 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create!(
       email: "vattirii@gmail.com",
-      last_name: "田中",
-      first_name: "太郎",
-      last_name_kana: "タナカ",
-      first_name_kana: "タロウ",
       password: "111111",
-      postal_code: "5440841",
-      address: "東京都港区台場1-11-1",
       telephone_number: "09012345671",
       nickname: "adoll"
     )
@@ -21,13 +15,7 @@ User.create!(
 9.times do |n|
     User.create!(
       email: "tanakataro#{n + 1}@gmail.com",
-      last_name: "田中#{n + 1}",
-      first_name: "太郎#{n + 1}",
-      last_name_kana: "タナカ",
-      first_name_kana: "タロウ",
       password: "11111#{n + 1}",
-      postal_code: "111111#{n + 1}",
-      address: "東京都港区台場1-11-#{n + 1}",
       telephone_number: "0901234567#{n + 1}",
       nickname: "タッキー#{n + 1}"
     )
@@ -62,7 +50,6 @@ User.create!(
       health: "test test test test test test test test test test test ",
       other: "test test test test test test test test test test test ",
       background: "test test test test test test test test test test test ",
-      postcode: "11111#{n + 1}",
       prefecture_code: "2#{n + 1}",
       address_city: "#{n + 1}市",
       breed_id: "1",

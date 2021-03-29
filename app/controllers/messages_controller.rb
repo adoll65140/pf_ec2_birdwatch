@@ -6,17 +6,7 @@ class MessagesController < ApplicationController
         if @message.save
           @roommembernotme=Entry.where(room_id: @room.id).where.not(user_id: current_user.id)
             @theid=@roommembernotme.find_by(room_id: @room.id)
-            notification = current_user.active_notifications.new(
-                room_id: @room.id,
-                message_id: @message.id,
-                visited_id: @theid.user_id,
-                visitor_id: current_user.id,
-                action: 'dm'
-            )
-            if notification.visitor_id == notification.visited_id
-                notification.checked = true
-            end
-            notification.save if notification.valid?
+            
             redirect_to "/rooms/#{@message.room_id}"
         end
       else

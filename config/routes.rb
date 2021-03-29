@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   get 'users/check' => 'users#check', as: 'check'
   get 'homes/home' => 'homes#home', as: 'home'
   get 'homes/about' => 'homes#about', as: 'about'
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: "users/sessions",
+    registrations: "users/registrations"
+  }
   resources :users
   resources :birds do
     resources :bird_comments, only: [:create, :destroy]

@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
-    @users = User.all
-    @birds = Bird.all
+    @posts = Post.all.order(created_at: :desc)
+    @users = User.all.order(created_at: :desc)
+    @birds = Bird.all.order(created_at: :desc)
   end
 
   def show
@@ -14,13 +14,13 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     @post.save
-    redirect_to root_path
+    redirect_to home_path
   end
 
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to root_path
+    redirect_to home_path
   end
 
   private

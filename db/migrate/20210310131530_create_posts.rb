@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration[5.2]
     
     t.string "title"
     t.integer "bird_id"
-    t.integer "genre_id"
+    t.integer "category_id"
     t.text "body"
     t.string "image_id"
     t.integer "user_id"

@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id])
     if Entry.where(user_id: current_user.id, room_id: @room.id).present?
-      @messages = @room.messages.all
+      @messages = @room.messages.all.order(created_at: :desc)
       @message = Message.new
       @entries = @room.entries
     else
@@ -18,6 +18,6 @@ class RoomsController < ApplicationController
   end
     
   def index
-    @rooms = current_user.rooms
+    @rooms = current_user.rooms.order(created_at: :desc)
   end
 end

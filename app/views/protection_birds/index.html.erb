@@ -1,5 +1,8 @@
 <div class="row">
-  <%= render 'layouts/bird_search', obj:protection_birds_path, message:"保護鳥検索" %><p class="ml-3">投稿は</p><%= link_to "こちら", new_protection_bird_path %>
+  <%= render 'layouts/bird_search', obj:protection_birds_path, message:"保護鳥検索" %>
+  <% if user_signed_in? %>
+  <p class="ml-3">投稿は</p><%= link_to "こちら", new_protection_bird_path %>
+  <% end %>
 </div>
 <div class="row">
 <% @protection_birds.each do |protection_bird| %>
