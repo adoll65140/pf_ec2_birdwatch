@@ -5,7 +5,7 @@
       <div class="card shadow p-4">
             <div class="card-content">
               <h3 class="card-title font-weight-bold p-2"><%= @protection_bird.title %></h3>
-  <%= attachment_image_tag @protection_bird, :image, :fill, 200, 200, fallback: "no_image.jpg" %>
+  <%= attachment_image_tag @protection_bird, :image, :fill, 200, 200 %>
   <p>種類：<%= @protection_bird.breed.name %>　　保護日：<%= @protection_bird.protect_day %></p>
   <p>性別：<%= @protection_bird.sex %>　　色：<%= @protection_bird.color %></p>
   <p>投稿主：<%= link_to @protection_bird.user.nickname, user_path(@protection_bird.user) %></p>

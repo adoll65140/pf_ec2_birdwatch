@@ -10,7 +10,7 @@
     <%= link_to adoption_path(adoption.id) do %>
   <p class="card-title pt-3"><%= adoption.title %></p>
   <% end %>
-  <%= attachment_image_tag adoption, :image, :fill, 100, 100, fallback: "no_image.jpg" %>
+  <%= attachment_image_tag adoption, :image, :fill, 100, 100 %>
   <p>種類：<%= adoption.breed.name %></p>
   <p>性別：<%= adoption.sex %></p>
   <p>地域：<%= adoption.prefecture_name %></p>

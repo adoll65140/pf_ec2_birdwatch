@@ -5,7 +5,7 @@
       <div class="card shadow p-4">
             <div class="card-content">
   <h3 class="card-title font-weight-bold p-2"><%= @lost_bird.title %></h3>
-  <%= attachment_image_tag @lost_bird, :bird_image, :fill, 200, 200, fallback: "no_image.jpg" %>
+  <%= attachment_image_tag @lost_bird, :bird_image, :fill, 200, 200 %>
   <p>鳥の名前：<%= @lost_bird.lost_bird_name %>　　行方不明日：<%= @lost_bird.lost_day %>　　種類：<%= @lost_bird.breed.name %></p>
   <p>投稿主：<%= link_to @lost_bird.user.nickname, user_path(@lost_bird.user) %></p>
   <p>性別：<%= @lost_bird.sex %>　　年齢：<%= @lost_bird.lost_bird_age %>歳　　色：<%= @lost_bird.color %></p>

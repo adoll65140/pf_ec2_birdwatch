@@ -10,7 +10,7 @@
     <%= link_to lost_bird_path(lost_bird.id) do %>
       <p class="card-title pt-3"><%= lost_bird.title %></p>
     <% end %>
-  <%= attachment_image_tag lost_bird, :bird_image, :fill, 200, 200, fallback: "no_image.jpg" %>
+  <%= attachment_image_tag lost_bird, :bird_image, :fill, 200, 200 %>
   <p>種類：<%= lost_bird.breed.name %></p>
   <p>地域：<%= lost_bird.prefecture_name %></p>
   <p>行方不明日：<%= lost_bird.lost_day %></p>

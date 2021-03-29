@@ -1,7 +1,7 @@
 <div class="col-md-10 mx-auto">
   <div class="card shadow p-5">
       <div class="card-content">
-<p><%= attachment_image_tag @user, :icon, :fill, 60, 60, fallback: "no_image.jpg", size:'60x60'%><%= @user.nickname %></p>
+<p><%= attachment_image_tag @user, :icon, :fill, 60, 60 %><%= @user.nickname %></p>
   <p><%= @user.introduction %></p>
   <% if user_signed_in? %>
   <p>フォロー数:<%= @user.follower.count %>フォロワー数:<%= @user.followed.count %>
@@ -39,7 +39,7 @@
 <% @birds.each do |bird| %>
     <%= link_to bird_path(bird.id) do %>
     <div>
-      <p><%= attachment_image_tag bird, :bird_icon, :fill, 60, 60, fallback: "no_image.jpg" %>
+      <p><%= attachment_image_tag bird, :bird_icon, :fill, 60, 60 %>
       <% end %>
       鳥のお名前：<%= link_to bird_path(bird.id) do %><%= bird.bird_name %></p>
     </div>

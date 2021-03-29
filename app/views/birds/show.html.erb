@@ -4,8 +4,8 @@
 <div class="col-md-10 mx-auto">
   <div class="card shadow p-5">
       <div class="card-content">
-  <p class="card-title"><%= attachment_image_tag @bird, :bird_icon, :fill, 60, 60, fallback: "no_image.jpg", size:'60x60' %>お名前：<%= @bird.bird_name %></p>
-  <%= attachment_image_tag @bird, :bird_back_image, :fill, 400, 400, fallback: "no_image.jpg", size:'500x300' %>
+  <p class="card-title"><%= attachment_image_tag @bird, :bird_icon, :fill, 60, 60 %>お名前：<%= @bird.bird_name %></p>
+  <%= attachment_image_tag @bird, :bird_back_image, :fill, 400, 400 %>
   <p>種類：<%= @bird.breed.name %>　　年齢：<%= @bird.bird_age %>歳　　飼い主<%= link_to @bird.user.nickname, user_path(@bird.user) %></p>
   <p>紹介分：<%= @bird.bird_introduction %></p>
 </div>

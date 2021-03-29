@@ -6,7 +6,7 @@
   <div class="card shadow p-5">
       <div class="card-content">
     <%= link_to user_path(user.id) do %>
-      <%= attachment_image_tag @user, :icon, :fill, 60, 60, fallback: "no_image.jpg" %>
+      <%= attachment_image_tag @user, :icon, :fill, 60, 60 %>
       <%= user.nickname %>
     <% end %>
       <%= user.introduction %>

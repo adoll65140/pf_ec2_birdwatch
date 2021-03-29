@@ -5,7 +5,7 @@
   <div class="card shadow p-4">
         <div class="card-content">
           <h3 class="card-title font-weight-bold p-2"><%= @item.item %></h3>
-  <%= attachment_image_tag @item, :image, :fill, 300, 300, fallback: "no_image.jpg" %>
+  <%= attachment_image_tag @item, :image, :fill, 300, 300 %>
   <p class="pt-2">投稿主：<%= link_to @item.user.nickname, user_path(@item.user) %></p>
   <p>ジャンル：<%= @item.genre.name %>　　　地域：<%= @item.prefecture_name %><%= @item.address_city %></p>
   <p>説明：<%= @item.introduction %></p>
