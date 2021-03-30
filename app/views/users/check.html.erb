@@ -1,6 +1,8 @@
 <% if @bird_list.present? %>
 <div class="col-md-10 mx-auto">
-  <h2>鳥のお気に入り</h2>
+  <div class="card p-3">
+    <h4>鳥のお気に入り</h4>
+  </div>
 </div>
   <% @bird_list.each do |bird| %>
   <div class="col-md-10 mx-auto">
@@ -21,12 +23,16 @@
   <% end %>
  <% else %>
  <div class="col-md-10 mx-auto">
- <h2>鳥のお気に入りはありません</h2>
- </div>
+  <div class="card p-3">
+    <h4>鳥のお気に入りはありません</h4>
+  </div>
+</div>
 <% end %>
 <% if @lost_list.present? %>
 <div class="col-md-10 mx-auto">
-  <h2>気になる迷子</h2>
+  <div class="card p-3">
+    <h4>気になる迷子</h4>
+  </div>
 </div>
   <% @lost_list.each do |lost_bird| %>
    <div class="col-md-10 mx-auto">
@@ -49,12 +55,16 @@
   <% end %>
   <% else %>
   <div class="col-md-10 mx-auto">
- <h2>気になる迷子はありません</h2>
- </div>
+  <div class="card p-3">
+    <h4>気になる迷子はありません</h4>
+  </div>
+</div>
 <% end %>
 <% if @protection_list.present? %>
 <div class="col-md-10 mx-auto">
-  <h2>気になる保護鳥</h2>
+  <div class="card p-3">
+    <h4>気になる保護鳥</h4>
+  </div>
 </div>
   <% @protection_list.each do |protection_bird| %>
    <div class="col-md-10 mx-auto">
@@ -76,6 +86,8 @@
   <% end %>
   <% else %>
   <div class="col-md-10 mx-auto">
- <h2>気になる保護鳥はありません</h2>
- </div>
+  <div class="card p-3">
+    <h4>気になる保護鳥はありません</h4>
+  </div>
+</div>
 <% end %>

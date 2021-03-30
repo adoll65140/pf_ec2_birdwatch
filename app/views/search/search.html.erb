@@ -1,6 +1,8 @@
 <% if @model == "user" %>
 <div class="col-md-10 mx-auto">
-  <h2>ユーザー検索</h2>
+  <div class="card p-3">
+    <h4>ユーザー検索</h4>
+  </div>
 </div>
   <% @users.each do |user| %>
   <div class="col-md-10 mx-auto">
@@ -18,7 +20,9 @@
 
 <% elsif @model == "post"%>
 <div class="col-md-10 mx-auto">
-  <h2>投稿検索</h2>
+  <div class="card p-3">
+    <h4>投稿検索</h4>
+  </div>
 </div>
   <% @posts.each do |post| %>
   <div class="col-md-10 mx-auto">
@@ -40,15 +44,15 @@
     </div>
   <% end %>
 <% else %>
-  <div class="col-md-10 mx-auto">
-    <h2>鳥検索</h2>
+<div class="col-md-10 mx-auto">
+  <div class="card p-3">
+    <h4>鳥検索</h4>
   </div>
+</div>
   <% @birds.each do |bird| %>
   <div class="col-md-10 mx-auto">
   <div class="card shadow p-5">
       <div class="card-content">
-
-
         <p>
           <%= attachment_image_tag bird, :bird_icon, :fill, 60, 60 %>
 

@@ -15,7 +15,7 @@
           </p>
 
   <% if @user.id == current_user.id %>
-    <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-success shadow" %>
+    <%= link_to "プロフィール編集", edit_user_path(@user.id), class: "btn btn-success shadow" %>
   <% else %>
     <% if @isRoom == true %>
         <p><%= link_to 'DMへ', room_path(@roomId), class: "btn btn-success shadow" %></p>
@@ -50,8 +50,10 @@
 </div>
 </div>
 <div class="col-md-10 mx-auto">
-        <h2>投稿一覧</h2>
-        </div>
+  <div class="card p-3">
+    <h4>投稿一覧</h4>
+  </div>
+</div>
 <% @user.posts.each do |post| %>
 <div class="col-md-10 mx-auto">
   <div class="card shadow p-5">

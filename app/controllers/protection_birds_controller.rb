@@ -11,6 +11,11 @@ class ProtectionBirdsController < ApplicationController
 
   def edit
     @protection_bird = ProtectionBird.find(params[:id])
+    if @protection_bird.user == current_user
+      render "edit"
+    else
+      redirect_to protection_birds_path
+    end
   end
 
   def show
@@ -21,14 +26,24 @@ class ProtectionBirdsController < ApplicationController
   def create
     @protection_bird = ProtectionBird.new(protection_bird_params)
     @protection_bird.user_id = current_user.id
-    @protection_bird.save
+    if @protection_bird.save
+      flash[:notice] = '登録しました'
     redirect_to protection_birds_path
+    else
+      flash.now[:alert] = "内容をお確かめください"
+      render :new
+    end
   end
 
   def update
     @protection_bird = ProtectionBird.find(params[:id])
-    @protection_bird.update(protection_bird_params)
-    redirect_to protection_bird_path(protection_bird.id)
+    if @protection_bird.update(protection_bird_params)
+      flash[:notice] = '変更しました'
+      redirect_to protection_bird_path(protection_bird.id)
+    else
+      flash.now[:alert] = "内容をお確かめください"
+      render :edit
+    end
   end
 
   def destroy

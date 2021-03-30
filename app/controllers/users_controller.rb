@@ -46,12 +46,22 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    if @user == current_user
+      render "edit"
+    else
+      redirect_to user_path
+    end
   end
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_path(@user.id)
+    if @user.update(user_params)
+      flash[:notice] = '変更しました'
+      redirect_to user_path(@user.id)
+    else
+      flash.now[:alert] = "内容をお確かめください"
+      render :edit
+    end
   end
 
   def check

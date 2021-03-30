@@ -2,6 +2,11 @@ class BirdsController < ApplicationController
 
   def edit
     @bird =Bird.find(params[:id])
+    if @bird.user == current_user
+      render "edit"
+    else
+      redirect_to birds_path
+    end
   end
 
   def index
@@ -10,8 +15,13 @@ class BirdsController < ApplicationController
 
   def update
     @bird = Bird.find(params[:id])
-    @bird.update(bird_params)
+    if @bird.update(bird_params)
+       flash[:notice] = '変更しました'
     redirect_to bird_path(@bird.id)
+    else
+      flash.now[:alert] = "内容をお確かめください"
+      render :edit
+    end
   end
 
   def show
@@ -26,8 +36,13 @@ class BirdsController < ApplicationController
   def create
     @bird = Bird.new(bird_params)
     @bird.user_id = current_user.id
-    @bird.save
-    redirect_to bird_path(@bird.id)
+    if @bird.save
+      flash[:notice] = '登録しました'
+      redirect_to bird_path(@bird.id)
+    else
+      flash.now[:alert] = "内容をお確かめください"
+      render :new
+    end
   end
 
   def destroy
@@ -39,7 +54,7 @@ class BirdsController < ApplicationController
   private
 
   def bird_params
-    params.require(:bird).permit(:bird_name, :bird_age, :bird_introduction, :bird_back_image, :bird_icon, :breed_id)
+    params.require(:bird).permit(:bird_name, :bird_age, :bird_introduction, :bird_back_image, :bird_icon, :breed_id ,:sex)
   end
 
 end

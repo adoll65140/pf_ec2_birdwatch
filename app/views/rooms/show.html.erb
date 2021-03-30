@@ -4,7 +4,9 @@
     </div>
 <% @entries.each do |e| %>
 <div class="col-md-10 mx-auto">
-  <h3><strong><a href="/users/<%= e.user.id %>"><%= e.user.nickname%></a></strong></h3>
+  <div class="card p-3">
+    <h4><strong>ユーザー名：<a href="/users/<%= e.user.id %>"><%= e.user.nickname%></a></strong></h4>
+  </div>
 </div>
 <% end %>
 
@@ -12,21 +14,26 @@
 </div>
 
 <div class="dmMain">
-<div class="col-md-10 mx-auto">
+  <div class="col-md-10 mx-auto">
+  <div class="card">
     <%= form_for @message do |f| %>
-    <%= f.text_field :message, :placeholder => "メッセージを入力して下さい" , :size => 100 %>
+    <%= f.text_area :message, :placeholder => "メッセージを入力して下さい" , size: "80x2" %>
     <%= f.hidden_field :room_id, :value => @room.id %>
     <br>
     <%= f.submit "送信する" %>
     <% end %>
-     </div>
+  </div>
+</div>
     <% @messages.each do |m| %>
     <div class="col-md-10 mx-auto">
   <div class="card shadow p-5">
       <div class="card-content">
         <strong><%= m.message %></strong>
-        <small><%= m.user.nickname %>さん</small><hr>
-         </div>
+        <small><%= link_to m.user.nickname, user_path(m.user) %>さん</small><hr>
+        <% if m.user == current_user %>
+        <%= link_to "削除", message_path(m.id), method: :delete, class: "btn btn-danger shadow" %>
+        <% end %>
+      </div>
   </div>
   </div>
     <% end %>

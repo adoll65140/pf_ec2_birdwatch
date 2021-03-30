@@ -4,7 +4,7 @@
 <div class="col-md-10 mx-auto">
   <div class="card shadow p-5">
 <%= form_with model: @post, local:true do |f| %>
-<table class='table table-borderless table-sm'> 
+<table class='table table-borderless table-sm'>
  <tbody>
     <tr>
       <th>
@@ -45,6 +45,11 @@
   </table>
 <% end %>
 </div>
+</div>
+<div class="col-md-10 mx-auto">
+  <div class="card p-3">
+    <h4>あなたの投稿</h4>
+  </div>
 </div>
 <% @posts.each do |post| %>
  <div class="col-md-10 mx-auto">

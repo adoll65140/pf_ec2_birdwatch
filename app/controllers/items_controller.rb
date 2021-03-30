@@ -7,12 +7,22 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    if @item.user == current_user
+      render "edit"
+    else
+      redirect_to items_path
+    end
   end
 
   def update
     @item = Item.find(params[:id])
-    @item.update(item_params)
+    if @item.update(item_params)
+      flash[:notice] = '変更しました'
     redirect_to item_path(@item.id)
+    else
+      flash.now[:alert] = "内容をお確かめください"
+      render :edit
+    end
   end
 
   def show
@@ -44,8 +54,13 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.user_id = current_user.id
-    @item.save
+    if @item.save
+       flash[:notice] = '登録しました'
     redirect_to items_path
+    else
+      flash.now[:alert] = "内容をお確かめください"
+      render :new
+    end
   end
 
   def destroy

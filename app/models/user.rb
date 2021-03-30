@@ -32,11 +32,12 @@ class User < ApplicationRecord
 
   with_options presence: true do #空白禁止
     validates :telephone_number
-    validates :nickname
+    validates :nickname, length: {maximum: 20}
   end
   validates :email, uniqueness: true #重複禁止
   validates :telephone_number, format: { with: /\A\d{10,11}\z/} #正規表現
   validates :is_deleted, inclusion:{in: [true, false]} #入力制限
+  validates :introduction, length: {maximum: 100}
 
   def self.search(search)
     if search

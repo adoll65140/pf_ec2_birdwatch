@@ -17,5 +17,7 @@ class Post < ApplicationRecord
       Post.all
     end
   end
+  validates :body, presence: true, length: {maximum: 255}
+  validates :title, presence: true, length: {maximum: 30}
 
 end

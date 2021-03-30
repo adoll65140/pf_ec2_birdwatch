@@ -88,3 +88,15 @@
   border-radius: 50%;
   overflow: hidden;
 }
+
+  .notice {
+    background-color: lightBlue;
+    text-align: center; 
+    color: $white;
+  }
+
+  .alert {
+    background-color: red;
+    text-align: center;
+    color: $white;
+  }

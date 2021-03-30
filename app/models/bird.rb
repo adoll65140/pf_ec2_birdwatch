@@ -8,9 +8,12 @@ class Bird < ApplicationRecord
   attachment :bird_back_image
 
   with_options presence: true do #空白禁止
-    validates :bird_name
-    validates :bird_introduction
-    validates :bird_age
+    validates :bird_name, length: {maximum: 20}
+    validates :bird_introduction, length: {maximum: 100}
+    validates :bird_icon
+    validates :bird_age, length: {maximum: 2}
+    validates :breed_id
+    validates :sex
   end
 
   def checked_by?(user)

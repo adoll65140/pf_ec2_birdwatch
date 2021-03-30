@@ -7,12 +7,22 @@ class AdoptionsController < ApplicationController
 
   def edit
     @adoption = Adoption.find(params[:id])
+    if @adoption.user == current_user
+      render "edit"
+    else
+      redirect_to adoptions_path
+    end
   end
 
   def update
     @adoption = Adoption.find(params[:id])
-    @adoption.update(adoption_params)
+    if @adoption.update(adoption_params)
+      flash[:notice] = '変更しました'
     redirect_to adoption_path(@adoption.id)
+    else
+      flash.now[:alert] = "内容をお確かめください"
+      render :edit
+    end
   end
 
   def show
@@ -46,8 +56,13 @@ class AdoptionsController < ApplicationController
   def create
     @adoption = Adoption.new(adoption_params)
     @adoption.user_id = current_user.id
-    @adoption.save
+    if @adoption.save
+      flash[:notice] = '登録しました'
     redirect_to adoptions_path
+    else
+      flash.now[:alert] = "内容をお確かめください"
+      render :new
+    end
   end
 
   def destroy

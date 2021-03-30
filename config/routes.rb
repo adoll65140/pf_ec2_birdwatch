@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   end
   resources :genres
   resources :breeds
-  resources :messages, :only => [:create]
+  resources :messages, :only => [:create, :destroy]
   resources :rooms, :only => [:create, :show, :index]
   get '/search' => 'search#search'
   post 'follow/:id' => 'relationships#follow', as: 'follow' 

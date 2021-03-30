@@ -11,6 +11,11 @@ class LostBirdsController < ApplicationController
 
   def edit
     @lost_bird = LostBird.find(params[:id])
+    if @lost_bird.user == current_user
+      render "edit"
+    else
+      redirect_to lost_birds_path
+    end
   end
 
   def show
@@ -21,14 +26,24 @@ class LostBirdsController < ApplicationController
   def create
     @lost_bird = LostBird.new(lost_bird_params)
     @lost_bird.user_id = current_user.id
-    @lost_bird.save
-    redirect_to lost_birds_path
+    if @lost_bird.save
+      flash[:notice] = '登録しました'
+      redirect_to lost_birds_path
+    else
+      flash.now[:alert] = "内容をお確かめください"
+      render :new
+    end
   end
 
   def update
     @lost_bird = LostBird.find(params[:id])
-    @lost_bird.update(lost_bird_params)
+    if @lost_bird.update(lost_bird_params)
+    flash[:notice] = '変更しました'
     redirect_to lost_bird_path(@lost_bird.id)
+    else
+      flash.now[:alert] = "内容をお確かめください"
+      render :edit
+    end
   end
 
   def destroy

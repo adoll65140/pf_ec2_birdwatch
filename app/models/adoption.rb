@@ -16,4 +16,17 @@ class Adoption < ApplicationRecord
 
   enum sex: { オス: 0, メス: 1, 不明:2}
 
+  with_options presence: true do
+    validates :title, length: {maximum: 30}
+    validates :introduction, length: {maximum: 100}
+    validates :health, length: {maximum: 100}
+    validates :other, length: {maximum: 100}
+    validates :background, length: {maximum: 100}
+    validates :address_city, length: {maximum: 30}
+    validates :image
+    validates :prefecture_code
+    validates :age, length: {maximum: 2}
+    validates :breed_id
+    validates :sex
+  end
 end

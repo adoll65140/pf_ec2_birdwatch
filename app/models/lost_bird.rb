@@ -8,14 +8,21 @@ class LostBird < ApplicationRecord
 
   validates :flag, inclusion:{in: [true, false]}
   with_options presence: true do
-    validates :lost_bird_name
-    validates :lost_bird_introduction
-    validates :lost_bird_age
-    validates :lost_place
-    validates :feature
-    validates :lost_introduction
+    validates :lost_bird_name, length: {maximum: 10}
+    validates :lost_bird_introduction, length: {maximum: 100}
+    validates :lost_bird_age, length: {maximum: 2}
+    validates :lost_place, length: {maximum: 30}
+    validates :feature, length: {maximum: 100}
+    validates :lost_introduction, length: {maximum: 100}
+    validates :color, length: {maximum: 20}
+    validates :prefecture_code
+    validates :bird_image
+    validates :breed_id
+    validates :title, length: {maximum: 30}
+    validates :lost_day
+    validates :sex
   end
-
+  
   enum sex: { オス: 0, メス: 1, 不明:2}
 
   def checked_by?(user)
