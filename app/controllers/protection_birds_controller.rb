@@ -1,4 +1,6 @@
 class ProtectionBirdsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit]
+  
   def new
     @protection_bird = ProtectionBird.new
   end

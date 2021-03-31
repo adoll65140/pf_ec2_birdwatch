@@ -1,4 +1,5 @@
 class BirdsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit]
 
   def edit
     @bird =Bird.find(params[:id])

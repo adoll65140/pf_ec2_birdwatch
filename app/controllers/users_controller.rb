@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:check, :edit]
+  
   def show
     @user=User.find(params[:id])
     @birds=@user.birds.page(params[:page]).per(1)
@@ -38,10 +40,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-  end
-
-  def profile
-    @user = User.find(params[:id])
   end
 
   def edit

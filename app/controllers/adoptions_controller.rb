@@ -1,4 +1,7 @@
 class AdoptionsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit]
+
+  
   def index
     @adoptions = Adoption.all.page(params[:page]).per(6).order(created_at: :desc)
     @adoptions = @adoptions.where('breed_id LIKE ?', "#{params[:breed_id]}") if params[:breed_id].present?

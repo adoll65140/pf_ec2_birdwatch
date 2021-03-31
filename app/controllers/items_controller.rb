@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit]
+  
   def index
     @items = Item.all.page(params[:page]).per(6).order(created_at: :desc)
     @items = @items.where('genre_id LIKE ?', "#{params[:genre_id]}") if params[:genre_id].present?
@@ -48,7 +50,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = Item.new
+      @item = Item.new
   end
 
   def create

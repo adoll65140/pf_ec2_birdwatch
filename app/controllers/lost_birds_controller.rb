@@ -1,6 +1,8 @@
 class LostBirdsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit]
+  
   def new
-    @lost_bird = LostBird.new
+      @lost_bird = LostBird.new
   end
 
   def index
